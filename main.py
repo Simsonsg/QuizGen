@@ -1,8 +1,5 @@
 """
-AutoQuiz — development entry point.
-
-Usage:
-    python main.py <file> [--strategy raw|clean|summarise]
+Main method for testing 
 """
 
 import argparse
