@@ -1,21 +1,10 @@
 """
-LLM-based summarisation of text chunks using the Claude API.
+LLM-based summarisation of text chunks.
+
+Uses the shared backend.llm module — provider is configured via LLM_PROVIDER in .env.
 """
 
-import anthropic
-from dotenv import load_dotenv
-
-load_dotenv()
-
-_CLIENT = None
-
-
-def _get_client() -> anthropic.Anthropic:
-    global _CLIENT
-    if _CLIENT is None:
-        _CLIENT = anthropic.Anthropic()
-    return _CLIENT
-
+from backend.llm import complete
 
 _SYSTEM_PROMPT = (
     "You are an expert at condensing educational content. "
@@ -32,25 +21,9 @@ _USER_TEMPLATE = (
 )
 
 
-def summarise_chunk(chunk: str, model: str = "claude-haiku-4-5-20251001") -> str:
-    """
-    Summarise a single text chunk using Claude.
-
-    Uses Haiku by default for cost-efficiency during preprocessing.
-    """
-    client = _get_client()
-    message = client.messages.create(
-        model=model,
-        max_tokens=512,
-        system=_SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": _USER_TEMPLATE.format(chunk=chunk)}],
-    )
-    return message.content[0].text.strip()
+def summarise_chunk(chunk: str) -> str:
+    return complete(_SYSTEM_PROMPT, _USER_TEMPLATE.format(chunk=chunk), max_tokens=512)
 
 
-def summarise_chunks(chunks: list[str], model: str = "claude-haiku-4-5-20251001") -> list[str]:
-    """
-    Summarise a list of text chunks. Returns a list of summary strings
-    in the same order as the input.
-    """
-    return [summarise_chunk(chunk, model=model) for chunk in chunks]
+def summarise_chunks(chunks: list[str]) -> list[str]:
+    return [summarise_chunk(chunk) for chunk in chunks]
