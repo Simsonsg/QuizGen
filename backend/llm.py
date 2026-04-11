@@ -1,63 +1,116 @@
 """
-Unified LLM client.
+Unified LLM client with provider fallback chain and retry logic.
 
-Configured via environment variables:
-  LLM_PROVIDER = anthropic | groq | gemini   (default: groq)
-  LLM_MODEL    = model name override          (optional)
-  ANTHROPIC_API_KEY
+Configure a comma-separated fallback chain in .env:
+  LLM_PROVIDERS=groq,gemini        # try Groq first, fall back to Gemini on 429
+  LLM_PROVIDERS=gemini,groq        # other way around
+
+Per-provider model overrides (optional):
+  LLM_MODEL_GROQ=llama-3.3-70b-versatile
+  LLM_MODEL_GEMINI=gemini-1.5-flash
+  LLM_MODEL_ANTHROPIC=claude-haiku-4-5-20251001
+
+API keys:
   GROQ_API_KEY
   GEMINI_API_KEY
-
-Groq and Gemini use OpenAI-compatible endpoints via the openai package.
-Anthropic uses the anthropic package directly.
+  ANTHROPIC_API_KEY
 """
 
 import os
+import time
+import logging
 from dotenv import load_dotenv
 
 load_dotenv()
 
-PROVIDER = os.getenv("LLM_PROVIDER", "groq").lower()
+logger = logging.getLogger(__name__)
 
-# Default models per provider
+# Build provider list from LLM_PROVIDERS (comma-separated) or fall back to LLM_PROVIDER
+_raw = os.getenv("LLM_PROVIDERS") or os.getenv("LLM_PROVIDER", "groq")
+PROVIDERS: list[str] = [p.strip().lower() for p in _raw.split(",") if p.strip()]
+
 _DEFAULTS = {
     "anthropic": "claude-haiku-4-5-20251001",
-    "groq": "llama-3.3-70b-versatile",
-    "gemini": "gemini-1.5-flash",
+    "groq":      "llama-3.3-70b-versatile",
+    "gemini":    "gemini-1.5-flash",
 }
 
 _BASE_URLS = {
-    "groq": "https://api.groq.com/openai/v1",
+    "groq":   "https://api.groq.com/openai/v1",
     "gemini": "https://generativelanguage.googleapis.com/v1beta/openai/",
 }
 
 _API_KEY_ENV = {
     "anthropic": "ANTHROPIC_API_KEY",
-    "groq": "GROQ_API_KEY",
-    "gemini": "GEMINI_API_KEY",
+    "groq":      "GROQ_API_KEY",
+    "gemini":    "GEMINI_API_KEY",
 }
 
+# Transient errors worth retrying (per attempt, within a single provider)
+_MAX_RETRIES = 2
+_RETRY_BACKOFF = [1, 3]  # seconds to wait before attempt 2 and 3
 
-def get_default_model() -> str:
-    return os.getenv("LLM_MODEL", _DEFAULTS[PROVIDER])
+
+def _model_for(provider: str) -> str:
+    env_key = f"LLM_MODEL_{provider.upper()}"
+    return os.getenv(env_key) or os.getenv("LLM_MODEL") or _DEFAULTS[provider]
 
 
 def complete(system: str, user: str, model: str | None = None, max_tokens: int = 512) -> str:
     """
-    Send a system + user message and return the assistant's reply as a string.
-    Works across all supported providers.
+    Send a system + user message and return the assistant reply.
+
+    Tries each provider in PROVIDERS in order.
+    - On 429 (rate limit): immediately moves to the next provider.
+    - On transient errors (connection, timeout): retries up to _MAX_RETRIES times
+      with backoff, then moves to the next provider.
+    - Raises RuntimeError if all providers are exhausted.
     """
-    model = model or get_default_model()
+    last_error: Exception | None = None
 
-    if PROVIDER == "anthropic":
-        return _complete_anthropic(system, user, model, max_tokens)
-    elif PROVIDER in ("groq", "gemini"):
-        return _complete_openai_compat(system, user, model, max_tokens)
+    for provider in PROVIDERS:
+        resolved_model = model or _model_for(provider)
+
+        for attempt in range(_MAX_RETRIES + 1):
+            try:
+                logger.debug("Trying provider=%s model=%s attempt=%d", provider, resolved_model, attempt + 1)
+                result = _call(provider, system, user, resolved_model, max_tokens)
+                if provider != PROVIDERS[0]:
+                    logger.info("Succeeded on fallback provider: %s", provider)
+                return result
+
+            except Exception as e:
+                last_error = e
+                if _is_rate_limit(e):
+                    logger.warning("Rate limit hit on %s — moving to next provider.", provider)
+                    break  # don't retry this provider
+                elif _is_transient(e) and attempt < _MAX_RETRIES:
+                    wait = _RETRY_BACKOFF[attempt]
+                    logger.warning("Transient error on %s (attempt %d), retrying in %ds: %s", provider, attempt + 1, wait, e)
+                    time.sleep(wait)
+                else:
+                    logger.warning("Non-retryable error on %s: %s", provider, e)
+                    break  # move to next provider
+
+    raise RuntimeError(
+        f"All providers exhausted ({', '.join(PROVIDERS)}). Last error: {last_error}"
+    ) from last_error
+
+
+# ---------------------------------------------------------------------------
+# Internal
+# ---------------------------------------------------------------------------
+
+def _call(provider: str, system: str, user: str, model: str, max_tokens: int) -> str:
+    if provider == "anthropic":
+        return _call_anthropic(system, user, model, max_tokens)
+    elif provider in ("groq", "gemini"):
+        return _call_openai_compat(provider, system, user, model, max_tokens)
     else:
-        raise ValueError(f"Unknown LLM_PROVIDER '{PROVIDER}'. Choose from: anthropic, groq, gemini")
+        raise ValueError(f"Unknown provider '{provider}'. Choose from: anthropic, groq, gemini")
 
 
-def _complete_anthropic(system: str, user: str, model: str, max_tokens: int) -> str:
+def _call_anthropic(system: str, user: str, model: str, max_tokens: int) -> str:
     import anthropic
     client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
     message = client.messages.create(
@@ -69,10 +122,9 @@ def _complete_anthropic(system: str, user: str, model: str, max_tokens: int) -> 
     return message.content[0].text.strip()
 
 
-def _complete_openai_compat(system: str, user: str, model: str, max_tokens: int) -> str:
+def _call_openai_compat(provider: str, system: str, user: str, model: str, max_tokens: int) -> str:
     from openai import OpenAI
-    api_key = os.getenv(_API_KEY_ENV[PROVIDER])
-    client = OpenAI(api_key=api_key, base_url=_BASE_URLS[PROVIDER])
+    client = OpenAI(api_key=os.getenv(_API_KEY_ENV[provider]), base_url=_BASE_URLS[provider])
     response = client.chat.completions.create(
         model=model,
         max_tokens=max_tokens,
@@ -82,3 +134,35 @@ def _complete_openai_compat(system: str, user: str, model: str, max_tokens: int)
         ],
     )
     return response.choices[0].message.content.strip()
+
+
+def _is_rate_limit(e: Exception) -> bool:
+    try:
+        from openai import RateLimitError as OAIRateLimit
+        if isinstance(e, OAIRateLimit):
+            return True
+    except ImportError:
+        pass
+    try:
+        from anthropic import RateLimitError as ANTRateLimit
+        if isinstance(e, ANTRateLimit):
+            return True
+    except ImportError:
+        pass
+    return False
+
+
+def _is_transient(e: Exception) -> bool:
+    try:
+        from openai import APIConnectionError, APITimeoutError
+        if isinstance(e, (APIConnectionError, APITimeoutError)):
+            return True
+    except ImportError:
+        pass
+    try:
+        from anthropic import APIConnectionError, APITimeoutError
+        if isinstance(e, (APIConnectionError, APITimeoutError)):
+            return True
+    except ImportError:
+        pass
+    return False
