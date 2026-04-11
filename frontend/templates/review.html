@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %} — Review{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" style="width: {{ (((idx + 1)) / total * 100) | int }}%"></div>
+  </div>
+  <p class="question-counter">Question {{ idx + 1 }} of {{ total }}</p>
+
+  {% if correct %}
+  <div class="alert alert-success">Correct!</div>
+  {% else %}
+  <div class="alert alert-error">Incorrect — the correct answer was <strong>{{ q.answer }}) {{ q.options[q.answer] }}</strong></div>
+  {% endif %}
+
+  <h2 class="question-text">{{ q.question }}</h2>
+
+  <div class="options review">
+    {% for letter, text in q.options.items() %}
+    <div class="option static
+      {% if letter == q.answer %} correct{% endif %}
+      {% if letter == user_answer and not correct %} wrong{% endif %}">
+      <span class="option-letter">{{ letter }}</span>
+      <span class="option-text">{{ text }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if q.explanation %}
+  <div class="explanation">
+    <h3>Explanation</h3>
+    <p>{{ q.explanation }}</p>
+  </div>
+  {% endif %}
+
+  <form action="/quiz/{{ sid }}/next" method="post">
+    <button type="submit" class="btn btn-primary">
+      {% if is_last %}See Results{% else %}Next Question{% endif %}
+    </button>
+  </form>
+</div>
+{% endblock %}

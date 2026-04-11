@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} — Question {{ idx + 1 }}{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" style="width: {{ ((idx) / total * 100) | int }}%"></div>
+  </div>
+  <p class="question-counter">Question {{ idx + 1 }} of {{ total }}</p>
+  <p class="badge badge-{{ q.difficulty }}">{{ q.difficulty }} · {{ q.cognitive_level }}</p>
+
+  <h2 class="question-text">{{ q.question }}</h2>
+
+  <form action="/quiz/{{ sid }}/answer" method="post" id="answer-form">
+    <div class="options">
+      {% for letter, text in q.options.items() %}
+      <label class="option">
+        <input type="radio" name="choice" value="{{ letter }}" required>
+        <span class="option-letter">{{ letter }}</span>
+        <span class="option-text">{{ text }}</span>
+      </label>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Answer</button>
+  </form>
+</div>
+{% endblock %}
