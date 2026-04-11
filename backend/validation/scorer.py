@@ -1,8 +1,5 @@
 """
-Semantic similarity scoring using sentence embeddings (local, no API cost).
-
-Uses all-MiniLM-L6-v2 — a small, fast model well-suited for sentence-level similarity.
-The model is downloaded once and cached by sentence-transformers automatically.
+Semantic similarity scoring using sentence embeddings
 """
 
 from sentence_transformers import SentenceTransformer, util

@@ -32,7 +32,7 @@ PROVIDERS: list[str] = [p.strip().lower() for p in _raw.split(",") if p.strip()]
 _DEFAULTS = {
     "anthropic": "claude-haiku-4-5-20251001",
     "groq":      "llama-3.3-70b-versatile",
-    "gemini":    "gemini-1.5-flash",
+    "gemini":    "gemini-2.0-flash",
 }
 
 _BASE_URLS = {
