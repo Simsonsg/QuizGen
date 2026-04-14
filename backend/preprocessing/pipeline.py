@@ -19,6 +19,7 @@ def preprocess(
     strategy: Strategy = "clean",
     max_words: int = 200,
     min_words: int = 40,
+    max_chunks: int = 15,
 ) -> list[str]:
     """
     Run the preprocessing pipeline on a document file.
@@ -43,6 +44,11 @@ def preprocess(
         text = clean_text(raw_text)
 
     chunks = chunk_text(text, max_words=max_words, min_words=min_words)
+
+    # Evenly sample across the document so all sections are represented
+    if max_chunks and len(chunks) > max_chunks:
+        step = len(chunks) / max_chunks
+        chunks = [chunks[int(i * step)] for i in range(max_chunks)]
 
     if strategy == "summarise":
         chunks = summarise_chunks(chunks)

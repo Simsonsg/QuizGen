@@ -73,6 +73,7 @@ async def generate(
     difficulty: str = Form("medium"),
     cognitive: str = Form("recall"),
     candidates: int = Form(3),
+    max_questions: int = Form(10),
     check_answerability: bool = Form(False),
 ):
     # Save uploaded file to a temp location
@@ -81,10 +82,13 @@ async def generate(
         shutil.copyfileobj(file.file, tmp)
         tmp_path = tmp.name
 
+    # Derive max_chunks: need enough chunks to plausibly hit max_questions
+    max_chunks = max(max_questions, 15)
+
     try:
-        chunks = preprocess(tmp_path, strategy=strategy)
+        chunks = preprocess(tmp_path, strategy=strategy, max_chunks=max_chunks)
         all_candidates = generate_all(chunks, difficulty=difficulty, cognitive_level=cognitive, n=candidates)
-        validated = filter_all(all_candidates, check_answerability=check_answerability)
+        validated = filter_all(all_candidates, check_answerability=check_answerability, max_questions=max_questions)
 
         if not validated:
             return render("index.html", {"error": "No questions passed validation. Try a different file or lower the similarity threshold."})
@@ -108,6 +112,7 @@ async def generate(
         "created_at": time.time(),
     }
 
+    _log_session(sid, _sessions[sid])
     return RedirectResponse(f"/quiz/{sid}", status_code=303)
 
 
@@ -143,6 +148,18 @@ async def answer(sid: str, choice: str = Form(...)):
     idx = session["current"]
     session["answers"][idx] = choice
     return RedirectResponse(f"/quiz/{sid}/review", status_code=303)
+
+
+@app.post("/quiz/{sid}/skip")
+async def skip(sid: str):
+    session = _get_session(sid)
+    if session is None:
+        return RedirectResponse("/")
+
+    session["current"] += 1
+    if session["current"] >= len(session["questions"]):
+        return RedirectResponse(f"/results/{sid}", status_code=303)
+    return RedirectResponse(f"/quiz/{sid}", status_code=303)
 
 
 @app.get("/quiz/{sid}/review", response_class=HTMLResponse)

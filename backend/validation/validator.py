@@ -75,14 +75,18 @@ def filter_all(
     all_candidates: list[list[Question]],
     similarity_threshold: float = 0.25,
     check_answerability: bool = True,
+    max_questions: int = 20,
 ) -> list[Question]:
     """
     Validate candidates across all chunks and return a flat list of passing questions.
+    Stops early once max_questions have been collected.
     """
     validated = []
     for candidates in all_candidates:
+        if max_questions and len(validated) >= max_questions:
+            break
         passing = filter_candidates(candidates, similarity_threshold, check_answerability)
         validated.extend(q for q, _ in passing)
-    return validated
+    return validated[:max_questions] if max_questions else validated
 
 

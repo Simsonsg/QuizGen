@@ -23,5 +23,9 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit Answer</button>
   </form>
+
+  <form action="/quiz/{{ sid }}/skip" method="post" style="margin-top:0.75rem">
+    <button type="submit" class="btn btn-secondary">Skip</button>
+  </form>
 </div>
 {% endblock %}

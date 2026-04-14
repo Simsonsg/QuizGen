@@ -178,8 +178,9 @@ h3 { font-size: 1rem; margin-bottom: 0.5rem; }
   border-radius: 9px;
   border: 1px solid #e0e0ee;
 }
-.result-item.pass { border-color: #b2e8d0; background: #f0fdf6; }
-.result-item.fail { border-color: #f5c2bf; background: #fff5f5; }
+.result-item.pass    { border-color: #b2e8d0; background: #f0fdf6; }
+.result-item.fail    { border-color: #f5c2bf; background: #fff5f5; }
+.result-item.skipped { border-color: #d0d0e0; background: #f8f8fc; }
 .result-icon { font-size: 1.1rem; font-weight: 700; min-width: 1.2rem; margin-top: 2px; }
 .result-item.pass .result-icon { color: #1a7a4a; }
 .result-item.fail .result-icon { color: #b71c1c; }

@@ -16,14 +16,18 @@
 
   <div class="results-list">
     {% for q, a in zip(questions, answers) %}
-    <div class="result-item {% if a == q.answer %}pass{% else %}fail{% endif %}">
-      <span class="result-icon">{% if a == q.answer %}✓{% else %}✗{% endif %}</span>
+    <div class="result-item {% if a == q.answer %}pass{% elif a is none %}skipped{% else %}fail{% endif %}">
+      <span class="result-icon">{% if a == q.answer %}✓{% elif a is none %}–{% else %}✗{% endif %}</span>
       <div class="result-body">
         <p class="result-question">{{ q.question }}</p>
         <p class="result-meta">
-          Your answer: <strong>{{ a }}) {{ q.options[a] if a else "—" }}</strong>
+          {% if a is none %}
+          <em>Skipped</em> &nbsp;· Correct: <strong>{{ q.answer }}) {{ q.options[q.answer] }}</strong>
+          {% else %}
+          Your answer: <strong>{{ a }}) {{ q.options[a] }}</strong>
           {% if a != q.answer %}
           &nbsp;· Correct: <strong>{{ q.answer }}) {{ q.options[q.answer] }}</strong>
+          {% endif %}
           {% endif %}
         </p>
       </div>
