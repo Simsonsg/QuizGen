@@ -71,6 +71,14 @@
           Enable cognitive-level check (uses extra API calls)
         </label>
       </div>
+      <hr style="margin: 1rem 0; border-color: #e0e0ee;">
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" id="baseline-toggle" name="_baseline_toggle">
+          <strong>Baseline mode</strong> — single-pass, no conditioning, no filtering
+          <input type="hidden" name="mode" id="mode-input" value="pipeline">
+        </label>
+      </div>
     </details>
 
     <button type="submit" class="btn btn-primary" id="submit-btn">
@@ -80,6 +88,13 @@
 </div>
 
 <script>
+  const baselineToggle = document.getElementById("baseline-toggle");
+  const modeInput = document.getElementById("mode-input");
+
+  baselineToggle.addEventListener("change", function() {
+    modeInput.value = this.checked ? "baseline" : "pipeline";
+  });
+
   document.getElementById("gen-form").addEventListener("submit", function() {
     const btn = document.getElementById("submit-btn");
     btn.textContent = "Generating… this may take a moment";

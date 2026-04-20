@@ -26,7 +26,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from backend.preprocessing.pipeline import preprocess
-from backend.generation import generate_all
+from backend.generation import generate_all, generate_all_baseline
 from backend.validation import filter_all
 from backend.explanation import generate_and_attach
 
@@ -69,6 +69,7 @@ async def index(request: Request):
 async def generate(
     request: Request,
     file: UploadFile = File(...),
+    mode: str = Form("pipeline"),
     strategy: str = Form("clean"),
     difficulty: str = Form("medium"),
     cognitive: str = Form("recall"),
@@ -88,11 +89,19 @@ async def generate(
 
     try:
         chunks = preprocess(tmp_path, strategy=strategy, max_chunks=max_chunks)
-        all_candidates = generate_all(chunks, difficulty=difficulty, cognitive_level=cognitive, n=candidates)
-        validated = filter_all(all_candidates, check_answerability=check_answerability, check_cognitive=check_cognitive, max_questions=max_questions)
 
-        if not validated:
-            return render("index.html", {"error": "No questions passed validation. Try a different file or lower the similarity threshold."})
+        if mode == "baseline":
+            print(f"\n{'─' * 60}")
+            print(f"  BASELINE MODE  |  single-pass, no conditioning, no filtering")
+            print(f"{'─' * 60}\n")
+            validated = generate_all_baseline(chunks, max_questions=max_questions)
+            if not validated:
+                return render("index.html", {"error": "Baseline generation produced no questions. Try a different file."})
+        else:
+            all_candidates = generate_all(chunks, difficulty=difficulty, cognitive_level=cognitive, n=candidates)
+            validated = filter_all(all_candidates, check_answerability=check_answerability, check_cognitive=check_cognitive, max_questions=max_questions)
+            if not validated:
+                return render("index.html", {"error": "No questions passed validation. Try a different file or lower the similarity threshold."})
 
         generate_and_attach(validated)
     finally:
@@ -104,9 +113,10 @@ async def generate(
         "answers": [None] * len(validated),
         "current": 0,
         "config": {
+            "mode": mode,
             "strategy": strategy,
-            "difficulty": difficulty,
-            "cognitive": cognitive,
+            "difficulty": difficulty if mode == "pipeline" else "unspecified",
+            "cognitive": cognitive if mode == "pipeline" else "unspecified",
             "filename": file.filename,
         },
         "feedback": {},
