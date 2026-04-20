@@ -136,6 +136,7 @@ async def quiz(request: Request, sid: str):
         "q": q,
         "idx": idx,
         "total": len(session["questions"]),
+        "prev_answer": session["answers"][idx],
     })
 
 
@@ -159,6 +160,17 @@ async def skip(sid: str):
     session["current"] += 1
     if session["current"] >= len(session["questions"]):
         return RedirectResponse(f"/results/{sid}", status_code=303)
+    return RedirectResponse(f"/quiz/{sid}", status_code=303)
+
+
+@app.post("/quiz/{sid}/prev")
+async def prev_question(sid: str):
+    session = _get_session(sid)
+    if session is None:
+        return RedirectResponse("/")
+
+    if session["current"] > 0:
+        session["current"] -= 1
     return RedirectResponse(f"/quiz/{sid}", status_code=303)
 
 
@@ -209,11 +221,13 @@ async def results(request: Request, sid: str):
     questions = session["questions"]
     answers = session["answers"]
     score = sum(1 for q, a in zip(questions, answers) if a == q["answer"])
+    avg_similarity = round(sum(q["similarity_score"] for q in questions) / len(questions), 4) if questions else 0
 
     return render("results.html", {
         "sid": sid,
         "questions": questions,
         "answers": answers,
+        "avg_similarity": avg_similarity,
         "score": score,
         "total": len(questions),
         "config": session["config"],
@@ -259,6 +273,7 @@ def _question_to_dict(q) -> dict:
         "difficulty": q.difficulty,
         "cognitive_level": q.cognitive_level,
         "explanation": q.explanation,
+        "similarity_score": round(q.similarity_score, 4),
     }
 
 

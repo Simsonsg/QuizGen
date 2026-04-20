@@ -14,6 +14,7 @@ class Question:
     cognitive_level: str         # "recall" | "comprehension" | "application" | "analysis"
     source_chunk: str
     explanation: str = ""        # filled in by the explanation module
+    similarity_score: float = 0.0  # set during validation — proxy for source grounding
 
     def correct_answer_text(self) -> str:
         return self.options.get(self.answer, "")

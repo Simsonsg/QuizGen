@@ -39,6 +39,7 @@ def validate(
         report["answerability_passed"] = True
 
     passed = report["relevance_passed"] and report["answerability_passed"]
+    question.similarity_score = report["similarity"]
     _print_report(question, report, passed, check_answerability)
     return passed, report
 

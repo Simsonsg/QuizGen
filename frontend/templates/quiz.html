@@ -15,7 +15,8 @@
     <div class="options">
       {% for letter, text in q.options.items() %}
       <label class="option">
-        <input type="radio" name="choice" value="{{ letter }}" required>
+        <input type="radio" name="choice" value="{{ letter }}" required
+          {% if prev_answer == letter %}checked{% endif %}>
         <span class="option-letter">{{ letter }}</span>
         <span class="option-text">{{ text }}</span>
       </label>
@@ -24,8 +25,18 @@
     <button type="submit" class="btn btn-primary">Submit Answer</button>
   </form>
 
-  <form action="/quiz/{{ sid }}/skip" method="post" style="margin-top:0.75rem">
-    <button type="submit" class="btn btn-secondary">Skip</button>
-  </form>
+  <div class="quiz-nav">
+    {% if idx > 0 %}
+    <form action="/quiz/{{ sid }}/prev" method="post">
+      <button type="submit" class="btn btn-secondary">← Previous</button>
+    </form>
+    {% else %}
+    <span></span>
+    {% endif %}
+
+    <form action="/quiz/{{ sid }}/skip" method="post">
+      <button type="submit" class="btn btn-secondary">Skip →</button>
+    </form>
+  </div>
 </div>
 {% endblock %}

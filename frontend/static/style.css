@@ -148,6 +148,13 @@ h3 { font-size: 1rem; margin-bottom: 0.5rem; }
   color: #1a1a2e;
 }
 
+/* Quiz nav */
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+}
+
 /* Review */
 .option.static { cursor: default; pointer-events: none; }
 .option.correct { border-color: #1a7a4a; background: #e6f9f0; }
@@ -186,6 +193,32 @@ h3 { font-size: 1rem; margin-bottom: 0.5rem; }
 .result-item.fail .result-icon { color: #b71c1c; }
 .result-question { font-size: 0.92rem; margin-bottom: 0.3rem; }
 .result-meta { font-size: 0.82rem; color: #555; }
+
+/* Grounding bar */
+.grounding-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: default;
+}
+.grounding-label { min-width: 110px; font-weight: 600; color: #333; }
+.grounding-bar-track {
+  flex: 1;
+  height: 8px;
+  background: #e8e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.grounding-bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+.grounding-bar-fill.high { background: #1a7a4a; }
+.grounding-bar-fill.mid  { background: #a05800; }
+.grounding-bar-fill.low  { background: #b71c1c; }
+.grounding-pct { min-width: 36px; text-align: right; font-weight: 700; }
+
+.sim-badge { font-size: 0.78rem; color: #777; }
 
 hr { border: none; border-top: 1px solid #e0e0ee; margin: 1.5rem 0; }
 
