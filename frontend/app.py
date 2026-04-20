@@ -75,6 +75,7 @@ async def generate(
     candidates: int = Form(3),
     max_questions: int = Form(10),
     check_answerability: bool = Form(False),
+    check_cognitive: bool = Form(False),
 ):
     # Save uploaded file to a temp location
     suffix = os.path.splitext(file.filename)[1]
@@ -88,7 +89,7 @@ async def generate(
     try:
         chunks = preprocess(tmp_path, strategy=strategy, max_chunks=max_chunks)
         all_candidates = generate_all(chunks, difficulty=difficulty, cognitive_level=cognitive, n=candidates)
-        validated = filter_all(all_candidates, check_answerability=check_answerability, max_questions=max_questions)
+        validated = filter_all(all_candidates, check_answerability=check_answerability, check_cognitive=check_cognitive, max_questions=max_questions)
 
         if not validated:
             return render("index.html", {"error": "No questions passed validation. Try a different file or lower the similarity threshold."})
