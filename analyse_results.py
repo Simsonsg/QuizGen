@@ -46,7 +46,7 @@ def pipeline_vs_baseline(sessions: list[dict]):
         groups[mode].append(s)
 
     for mode, group in sorted(groups.items()):
-        sim_scores = [q["similarity_score"] for s in group for q in s["questions"]]
+        sim_scores = [q.get("similarity_score", 0) for s in group for q in s["questions"] if q.get("similarity_score") is not None]
         expl_present = [1 for s in group for q in s["questions"] if q.get("explanation")]
         total_q = sum(len(s["questions"]) for s in group)
         pass_rates = [s["config"].get("validation_pass_rate", 1.0) for s in group]
@@ -72,7 +72,7 @@ def preprocessing_comparison(sessions: list[dict]):
         if not group:
             print(f"\n  {strategy}: no sessions")
             continue
-        sim_scores = [q["similarity_score"] for s in group for q in s["questions"]]
+        sim_scores = [q.get("similarity_score") for s in group for q in s["questions"] if q.get("similarity_score") is not None]
         expl_present = [q for s in group for q in s["questions"] if q.get("explanation")]
         total_q = sum(len(s["questions"]) for s in group)
         print(f"\n  Strategy: {strategy.upper()}  ({len(group)} sessions, {total_q} questions)")
@@ -88,7 +88,8 @@ def difficulty_distribution(sessions: list[dict]):
     by_difficulty = defaultdict(list)
     for s in pipeline:
         for q in s["questions"]:
-            by_difficulty[q.get("difficulty", "?")].append(q["similarity_score"])
+            if q.get("similarity_score") is not None:
+                by_difficulty[q.get("difficulty", "?")].append(q["similarity_score"])
 
     for level in ["easy", "medium", "hard", "unspecified"]:
         scores = by_difficulty.get(level, [])
@@ -103,7 +104,8 @@ def cognitive_level_distribution(sessions: list[dict]):
     by_level = defaultdict(list)
     for s in pipeline:
         for q in s["questions"]:
-            by_level[q.get("cognitive_level", "?")].append(q["similarity_score"])
+            if q.get("similarity_score") is not None:
+                by_level[q.get("cognitive_level", "?")].append(q["similarity_score"])
 
     for level in ["recall", "comprehension", "application", "analysis", "unspecified"]:
         scores = by_level.get(level, [])
@@ -134,14 +136,14 @@ def per_file_breakdown(sessions: list[dict]):
         by_file[s["config"].get("filename", "unknown")].append(s)
 
     for filename, group in sorted(by_file.items()):
-        sim_scores = [q["similarity_score"] for s in group for q in s["questions"]]
+        sim_scores = [q["similarity_score"] for s in group for q in s["questions"] if q.get("similarity_score") is not None]
         total_q = sum(len(s["questions"]) for s in group)
         print(f"\n  {filename}  ({len(group)} sessions, {total_q} questions)")
         print(f"    Avg similarity: {avg(sim_scores)}")
-        modes = set(s["config"].get("mode") for s in group)
-        strategies = set(s["config"].get("strategy") for s in group)
-        print(f"    Modes run     : {', '.join(sorted(modes))}")
-        print(f"    Strategies run: {', '.join(sorted(strategies))}")
+        modes = sorted(m for m in set(s["config"].get("mode") for s in group) if m)
+        strategies = sorted(t for t in set(s["config"].get("strategy") for s in group) if t)
+        print(f"    Modes run     : {', '.join(modes) or 'unknown'}")
+        print(f"    Strategies run: {', '.join(strategies) or 'unknown'}")
 
 
 def sample_questions(sessions: list[dict], n: int = 3):
@@ -149,7 +151,7 @@ def sample_questions(sessions: list[dict], n: int = 3):
 
     for mode in ["pipeline", "baseline"]:
         group = [s for s in sessions if s["config"].get("mode") == mode]
-        all_q = [(q, s["config"]) for s in group for q in s["questions"]]
+        all_q = [(q, s["config"]) for s in group for q in s["questions"] if q.get("similarity_score") is not None]
         top = sorted(all_q, key=lambda x: x[0]["similarity_score"], reverse=True)[:n]
         print(f"\n  {mode.upper()} — top {n} by similarity:")
         for q, cfg in top:
