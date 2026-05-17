@@ -14,16 +14,6 @@
     {{ config.difficulty }} · {{ config.cognitive }} · {{ config.strategy }}
   </p>
 
-  <div class="grounding-bar-wrap" title="Average semantic similarity between each question and its source text. Higher = more grounded in the material.">
-    {% set gpct = (avg_similarity * 100) | int %}
-    <span class="grounding-label">Source grounding</span>
-    <div class="grounding-bar-track">
-      <div class="grounding-bar-fill {% if gpct >= 60 %}high{% elif gpct >= 35 %}mid{% else %}low{% endif %}"
-           style="width: {{ gpct }}%"></div>
-    </div>
-    <span class="grounding-pct">{{ gpct }}%</span>
-  </div>
-
   <div class="results-list">
     {% for q, a in zip(questions, answers) %}
     <div class="result-item {% if a == q.answer %}pass{% elif a is none %}skipped{% else %}fail{% endif %}">
@@ -39,7 +29,6 @@
           &nbsp;· Correct: <strong>{{ q.answer }}) {{ q.options[q.answer] }}</strong>
           {% endif %}
           {% endif %}
-          &nbsp;· <span class="sim-badge" title="Semantic similarity to source text">⬤ {{ (q.similarity_score * 100) | int }}% grounded</span>
         </p>
       </div>
     </div>

@@ -89,8 +89,7 @@ def generate_all(
     n: int = 3,
 ) -> list[list[Question]]:
     """
-    Generate candidate questions for every chunk.
-
+    Generate candidate questions for every chunk sequentially.
     Returns a list of lists — one inner list of candidates per chunk.
     """
     return [generate_candidates(chunk, difficulty, cognitive_level, n) for chunk in chunks]

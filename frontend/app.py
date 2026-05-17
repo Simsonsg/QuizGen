@@ -14,6 +14,7 @@ Routes:
 
 import json
 import os
+import random
 import shutil
 import tempfile
 import time
@@ -26,8 +27,8 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from backend.preprocessing.pipeline import preprocess
-from backend.generation import generate_all, generate_all_baseline
-from backend.validation import filter_all
+from backend.generation import generate_candidates, generate_all_baseline
+from backend.validation import filter_candidates
 from backend.explanation import generate_and_attach
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -65,6 +66,11 @@ async def index(request: Request):
     return render("index.html", {})
 
 
+@app.post("/")
+async def index_post():
+    return RedirectResponse("/", status_code=303)
+
+
 @app.post("/generate")
 async def generate(
     request: Request,
@@ -90,16 +96,38 @@ async def generate(
     try:
         chunks = preprocess(tmp_path, strategy=strategy, max_chunks=max_chunks)
 
+        total_candidates = 0
         if mode == "baseline":
             print(f"\n{'─' * 60}")
             print(f"  BASELINE MODE  |  single-pass, no conditioning, no filtering")
             print(f"{'─' * 60}\n")
             validated = generate_all_baseline(chunks, max_questions=max_questions)
+            total_candidates = len(validated)
             if not validated:
                 return render("index.html", {"error": "Baseline generation produced no questions. Try a different file."})
         else:
-            all_candidates = generate_all(chunks, difficulty=difficulty, cognitive_level=cognitive, n=candidates)
-            validated = filter_all(all_candidates, check_answerability=check_answerability, check_cognitive=check_cognitive, max_questions=max_questions)
+            # Generate and validate chunk-by-chunk — stop as soon as we have
+            # enough questions. Shuffle so coverage is spread across the
+            # document rather than front-loaded.
+            shuffled = chunks[:]
+            random.shuffle(shuffled)
+            total_chunks = len(shuffled)
+            print(f"\n{'─' * 60}")
+            print(f"  PIPELINE  |  {total_chunks} chunks  |  {candidates} candidates/chunk  |  target {max_questions} questions")
+            print(f"{'─' * 60}")
+            validated = []
+            for chunk_i, chunk in enumerate(shuffled, 1):
+                if len(validated) >= max_questions:
+                    break
+                print(f"\n  Chunk {chunk_i}/{total_chunks}")
+                cands = generate_candidates(chunk, difficulty=difficulty, cognitive_level=cognitive, n=candidates)
+                total_candidates += len(cands)
+                passing = filter_candidates(cands, check_answerability=check_answerability, check_cognitive=check_cognitive)
+                validated.extend(q for q, _ in passing)
+            validated = validated[:max_questions]
+            print(f"\n{'─' * 60}")
+            print(f"  {len(validated)} questions validated from {total_candidates} candidates ({chunk_i} chunks processed)")
+            print(f"{'─' * 60}\n")
             if not validated:
                 return render("index.html", {"error": "No questions passed validation. Try a different file or lower the similarity threshold."})
 
@@ -118,6 +146,10 @@ async def generate(
             "difficulty": difficulty if mode == "pipeline" else "unspecified",
             "cognitive": cognitive if mode == "pipeline" else "unspecified",
             "filename": file.filename,
+            "candidates_per_chunk": candidates,
+            "total_candidates_generated": total_candidates,
+            "questions_passed_validation": len(validated),
+            "validation_pass_rate": round(len(validated) / total_candidates, 4) if total_candidates else 0,
         },
         "feedback": {},
         "created_at": time.time(),

@@ -53,16 +53,14 @@ def generate_baseline(chunk: str) -> list[Question]:
 
 def generate_all_baseline(chunks: list[str], max_questions: int = 10) -> list[Question]:
     """
-    Generate one baseline question per chunk, up to max_questions.
-
-    Returns a flat list of Question objects (no candidate nesting).
+    Generate one baseline question per chunk sequentially, up to max_questions.
+    Stops as soon as max_questions is reached.
     """
     questions = []
     for chunk in chunks:
         if len(questions) >= max_questions:
             break
-        result = generate_baseline(chunk)
-        questions.extend(result)
+        questions.extend(generate_baseline(chunk))
     return questions[:max_questions]
 
 

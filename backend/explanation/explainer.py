@@ -66,22 +66,11 @@ def generate_and_attach(
     alignment_threshold: float = 0.20,
 ) -> list[Question]:
     """
-    Generate explanations for all questions, validate their alignment with the
-    source chunk, and attach passing explanations to each Question in-place.
-
-    Questions whose explanations fall below the alignment threshold have their
-    explanation set to an empty string and are flagged — they can still be shown
-    to the user but without an explanation.
-
-    Returns the same list with explanations attached.
+    Generate explanations for all questions, validate alignment with source,
+    and attach passing explanations in-place. Returns the same list.
     """
     for q in questions:
         explanation = generate_explanation(q)
         score = similarity(explanation, q.source_chunk)
-
-        if score >= alignment_threshold:
-            q.explanation = explanation
-        else:
-            q.explanation = ""
-
+        q.explanation = explanation if score >= alignment_threshold else ""
     return questions
