@@ -1,15 +1,5 @@
 """
 AutoQuiz web interface.
-
-Routes:
-  GET  /                          — upload + config form
-  POST /generate                  — run pipeline, create session
-  GET  /quiz/{sid}                — current question
-  POST /quiz/{sid}/answer         — submit answer, redirect to review
-  GET  /quiz/{sid}/review         — show correct answer + explanation
-  POST /quiz/{sid}/next           — advance to next question or results
-  GET  /results/{sid}             — final score + feedback form
-  POST /results/{sid}/feedback    — save feedback, log session to disk
 """
 
 import json
