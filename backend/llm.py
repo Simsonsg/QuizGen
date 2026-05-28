@@ -11,7 +11,6 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-# Build provider list from LLM_PROVIDERS (comma-separated) or fall back to LLM_PROVIDER
 _raw = os.getenv("LLM_PROVIDERS") or os.getenv("LLM_PROVIDER", "groq")
 PROVIDERS: list[str] = [p.strip().lower() for p in _raw.split(",") if p.strip()]
 
@@ -32,7 +31,6 @@ _API_KEY_ENV = {
     "gemini":    "GEMINI_API_KEY",
 }
 
-# Transient errors worth retrying (per attempt, within a single provider)
 _MAX_RETRIES = 2
 _RETRY_BACKOFF = [1, 3]  # seconds to wait before attempt 2 and 3
 
