@@ -1,12 +1,5 @@
 """
 Controlled multi-candidate question generation.
-
-For each chunk, the LLM is prompted to generate N candidate questions with:
-  - explicit difficulty conditioning (easy / medium / hard)
-  - Bloom's taxonomy cognitive-level conditioning
-  - source restriction (questions must be answerable from the provided text only)
-
-The LLM is asked to return structured JSON, which is parsed into Question objects.
 """
 
 import json

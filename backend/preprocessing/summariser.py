@@ -1,7 +1,5 @@
 """
 LLM-based summarisation of text chunks.
-
-Uses the shared backend.llm module — provider is configured via LLM_PROVIDER in .env.
 """
 
 from backend.llm import complete

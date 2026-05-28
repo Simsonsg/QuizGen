@@ -1,10 +1,5 @@
 """
 Segment text into semantically coherent chunks using sentence boundaries.
-
-Strategy:
-- Split into sentences with NLTK
-- Accumulate sentences until a word-count ceiling is reached
-- Never break mid-sentence
 """
 
 import nltk
@@ -20,14 +15,6 @@ except LookupError:
 def chunk_text(text: str, max_words: int = 200, min_words: int = 40) -> list[str]:
     """
     Split text into chunks bounded by sentence boundaries.
-
-    Args:
-        text: Cleaned input text.
-        max_words: Maximum words per chunk before forcing a split.
-        min_words: Minimum words for a chunk to be kept (drops trailing fragments).
-
-    Returns:
-        List of text chunks.
     """
     sentences = sent_tokenize(text)
     chunks = []

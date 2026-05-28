@@ -1,11 +1,5 @@
 """
 Rule-based cleaning of raw extracted text.
-
-Removes common noise from lecture slides and notes:
-- Slide/page numbers (e.g. "Slide 3", "Page 3 of 10", standalone digits)
-- Short lines that are likely headers or footers
-- Repeated whitespace and blank lines
-- Common boilerplate phrases
 """
 
 import re

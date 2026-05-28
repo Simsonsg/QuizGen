@@ -1,17 +1,5 @@
 """
 Cognitive-level validation.
-
-Asks the LLM to independently classify the Bloom's Taxonomy level of a generated
-question, then checks whether it matches the intended level.
-
-This measures how well difficulty conditioning actually works — useful evaluation
-data for the dissertation.
-
-Bloom's levels used in this system:
-  recall        — remembering facts, definitions, terms
-  comprehension — explaining or paraphrasing concepts
-  application   — applying a concept to a scenario
-  analysis      — comparing, contrasting, or breaking down ideas
 """
 
 from backend.llm import complete

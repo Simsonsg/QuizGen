@@ -23,15 +23,6 @@ def preprocess(
 ) -> list[str]:
     """
     Run the preprocessing pipeline on a document file.
-
-    Args:
-        file_path: Path to the input document (.pdf, .pptx, or .txt).
-        strategy: Preprocessing strategy — "raw", "clean", or "summarise".
-        max_words: Maximum words per chunk.
-        min_words: Minimum words for a chunk to be retained.
-
-    Returns:
-        List of text chunks ready for question generation.
     """
     if strategy not in ("raw", "clean", "summarise"):
         raise ValueError(f"Unknown strategy '{strategy}'. Choose from: raw, clean, summarise")

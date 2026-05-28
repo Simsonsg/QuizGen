@@ -1,19 +1,5 @@
 """
-Unified LLM client with provider fallback chain and retry logic.
-
-Configure a comma-separated fallback chain in .env:
-  LLM_PROVIDERS=groq,gemini        # try Groq first, fall back to Gemini on 429
-  LLM_PROVIDERS=gemini,groq        # other way around
-
-Per-provider model overrides (optional):
-  LLM_MODEL_GROQ=llama-3.3-70b-versatile
-  LLM_MODEL_GEMINI=gemini-1.5-flash
-  LLM_MODEL_ANTHROPIC=claude-haiku-4-5-20251001
-
-API keys:
-  GROQ_API_KEY
-  GEMINI_API_KEY
-  ANTHROPIC_API_KEY
+LLM provider 
 """
 
 import os
@@ -59,12 +45,6 @@ def _model_for(provider: str) -> str:
 def complete(system: str, user: str, model: str | None = None, max_tokens: int = 512) -> str:
     """
     Send a system + user message and return the assistant reply.
-
-    Tries each provider in PROVIDERS in order.
-    - On 429 (rate limit): immediately moves to the next provider.
-    - On transient errors (connection, timeout): retries up to _MAX_RETRIES times
-      with backoff, then moves to the next provider.
-    - Raises RuntimeError if all providers are exhausted.
     """
     last_error: Exception | None = None
 
@@ -97,9 +77,6 @@ def complete(system: str, user: str, model: str | None = None, max_tokens: int =
     ) from last_error
 
 
-# ---------------------------------------------------------------------------
-# Internal
-# ---------------------------------------------------------------------------
 
 def _call(provider: str, system: str, user: str, model: str, max_tokens: int) -> str:
     if provider == "anthropic":

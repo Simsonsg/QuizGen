@@ -1,13 +1,5 @@
 """
 Grounded explanation generation.
-
-For each validated question, the LLM generates an explanation that:
-  - justifies why the correct answer is right
-  - clarifies why each distractor is wrong
-  - is strictly grounded in the source chunk (no external knowledge)
-
-Explanations are then checked for semantic alignment with the source.
-Those with low alignment are discarded.
 """
 
 from backend.llm import complete

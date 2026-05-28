@@ -1,8 +1,5 @@
 """
 LLM-based answerability check.
-
-Asks the LLM whether the correct answer to a question can be directly
-supported by the source chunk. Returns True if answerable, False otherwise.
 """
 
 from backend.llm import complete

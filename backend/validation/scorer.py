@@ -17,7 +17,6 @@ def _get_model() -> SentenceTransformer:
 def similarity(text_a: str, text_b: str) -> float:
     """
     Compute cosine similarity between two texts.
-    Returns a float in [0, 1].
     """
     model = _get_model()
     embeddings = model.encode([text_a, text_b], convert_to_tensor=True)
@@ -26,7 +25,4 @@ def similarity(text_a: str, text_b: str) -> float:
 
 
 def question_chunk_similarity(question: str, chunk: str) -> float:
-    """
-    Measure how semantically relevant a question is to its source chunk.
-    """
     return similarity(question, chunk)
