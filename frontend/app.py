@@ -79,7 +79,7 @@ async def generate(
         shutil.copyfileobj(file.file, tmp)
         tmp_path = tmp.name
 
-    # Derive max_chunks: need enough chunks to plausibly hit max_questions
+    # Derive max_chunks
     max_chunks = max(max_questions, 15)
 
     try:
@@ -97,9 +97,7 @@ async def generate(
             for q in validated:
                 q.similarity_score = round(question_chunk_similarity(q.question, q.source_chunk), 4)
         else:
-            # Generate and validate chunk-by-chunk — stop as soon as we have
-            # enough questions. Shuffle so coverage is spread across the
-            # document rather than front-loaded.
+            # Generate and validate chunk-by-chunk 
             shuffled = chunks[:]
             random.shuffle(shuffled)
             total_chunks = len(shuffled)
