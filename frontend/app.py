@@ -29,6 +29,7 @@ from fastapi.staticfiles import StaticFiles
 from backend.preprocessing.pipeline import preprocess
 from backend.generation import generate_candidates, generate_all_baseline
 from backend.validation import filter_candidates
+from backend.validation.scorer import question_chunk_similarity
 from backend.explanation import generate_and_attach
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -105,6 +106,8 @@ async def generate(
             total_candidates = len(validated)
             if not validated:
                 return render("index.html", {"error": "Baseline generation produced no questions. Try a different file."})
+            for q in validated:
+                q.similarity_score = round(question_chunk_similarity(q.question, q.source_chunk), 4)
         else:
             # Generate and validate chunk-by-chunk — stop as soon as we have
             # enough questions. Shuffle so coverage is spread across the

@@ -1,0 +1,311 @@
+session,source,strategy,difficulty,cognitive,q_num,question,answer,clarity,correctness,distractor,cog_match
+S1,RL,clean,easy,recall,1,What is a Markov Decision Process (MDP)?,An environment with states actions and rewards.,4,1,3,1
+S1,RL,clean,easy,recall,2,In Dynamic Programming what technique is used to avoid recomputing solutions to sub-problems?,Memoization.,5,1,3,1
+S1,RL,clean,easy,recall,3,What is the primary purpose of Dynamic Programming?,To break down a problem into sub-problems recursively.,3,1,2,1
+S1,RL,clean,easy,recall,4,What condition is used to stop the Iterative Policy Evaluation?,When there are no updates,3,0,2,1
+S1,RL,clean,easy,recall,5,What is the purpose of the Greedy Policy?,To find a better policy with a higher value for each state,3,1,2,1
+S1,RL,clean,easy,recall,6,For what value of k is the greedy policy already the optimal policy?,At k = 3,5,1,4,1
+S1,RL,clean,easy,recall,7,What does the Bellman Optimality Equation provide?,A recursive decomposition of the value function,4,1,3,1
+S1,RL,clean,easy,recall,8,According to the text what does the Markov property satisfy?,The optimal value for a state can be reused,3,1,2,1
+S1,RL,clean,easy,recall,9,What is the main goal of Policy Improvement in Dynamic Programming?,Improving the policy to achieve a better value function,4,1,3,1
+S1,RL,clean,easy,recall,10,What is the term called for avoiding overly mathematical or misleading connotations of a problem-solving approach?,Richard Bellman's Term,2,0,1,1
+S1,RL,clean,easy,recall,11,What is the property of a problem that allows us to break it into sub-problems and recombine their optimal solutions?,Optimal Substructure,5,1,3,1
+S1,RL,clean,easy,recall,12,What is the condition for using Dynamic Programming as mentioned in the text?,The problem must satisfy both Optimal Substructure and Overlapping Sub-problems,4,1,3,1
+S1,RL,clean,easy,recall,13,What is the goal of prioritising states by the size of their last value update?,To handle states that need more updates first,4,1,3,1
+S1,RL,clean,easy,recall,14,What information is used to determine which states are relevant in Real-time Dynamic Programming?,Agent experience,4,1,3,1
+S1,RL,clean,easy,recall,15,What is the purpose of Storing states in a priority queue?,To focus on areas of the state-space that are more active in their updates,4,1,3,1
+S1,RL,clean,easy,recall,16,How do we choose the best action from a state?,Using q(s a) to select the action with the best value,3,1,3,1
+S1,RL,clean,easy,recall,17,What happens if improvement stops for all states?,We have reached optimality,5,1,3,1
+S1,RL,clean,easy,recall,18,What is the policy set A?,{Up Down Right Left},2,1,1,1
+S1,RL,clean,easy,recall,19,At what value does the agent select each action in a given state?,0.25,5,1,3,1
+S1,RL,clean,easy,recall,20,What can be said about the agent's behavior?,It follows a policy based on a random walk.,4,1,3,1
+S2,RL,clean,medium,recall,1,According to the text what property do all states in a Markov Decision Process (MDP) possess?,Markov Property,5,1,3,1
+S2,RL,clean,medium,recall,2,In dynamic programming what term is used for caching solutions to sub-problems that reoccur frequently?,Memoization,5,1,4,1
+S2,RL,clean,medium,recall,3,Who coined the term Dynamic Programming according to the source text?,Richard Bellman,5,1,4,1
+S2,RL,clean,medium,recall,4,Which of the following is NOT mentioned in the text as an example of a sequential and time series problem?,Sorting algorithms,4,1,3,1
+S2,RL,clean,medium,recall,5,What two basic properties must a problem have to be solved using Dynamic Programming as stated in the text?,Optimal substructure and overlapping sub-problems,5,1,3,1
+S2,RL,clean,medium,recall,6,According to the Bellman Optimality Equation description which elements are used to recursively decompose the value function?,Both the immediate reward from the best action and the value of the successor state,5,1,3,1
+S2,RL,clean,medium,recall,7,In the Dynamic Programming approach to solving MDPs which component is responsible for estimating the value of a state given a particular policy?,Policy Evaluation,5,1,4,1
+S2,RL,clean,medium,recall,8,What assumption does Dynamic Programming make about the information available for an MDP?,Full knowledge of transition probabilities rewards and the discount factor,4,1,3,1
+S2,RL,clean,medium,recall,9,In policy evaluation what is the purpose of using the Bellman Equation iteratively?,To update the value of each state based on its successors and reward,4,1,3,1
+S2,RL,clean,medium,recall,10,What does the vector v^k represent during the iterative policy evaluation process?,The vector of state values after k update iterations,4,1,3,1
+S2,RL,clean,medium,recall,11,According to the text what value is assigned to a terminal state in the initial value approximation vector?,0,5,1,3,1
+S2,RL,clean,medium,recall,12,What is the reward assigned to each transition in the Simple Gridworld example?,-1,5,1,3,1
+S2,RL,clean,medium,recall,13,What is the discount factor used in the Simple Gridworld example?,1,4,1,3,1
+S2,RL,clean,medium,recall,14,In the Bellman equation context what does the policy pi(a|s) represent?,The probability of choosing action a when the agent is in state s,5,1,3,1
+S2,RL,clean,medium,recall,15,According to the uniform random policy described what probability does the agent assign to each action in any state?,0.25,5,1,4,1
+S2,RL,clean,medium,recall,16,What type of behavior does the agent exhibit when it follows the policy outlined in the text?,A random walk,5,1,3,1
+S2,RL,clean,medium,recall,17,What is the reward value (r) used in the calculations described in the text?,-1,4,1,3,1
+S2,RL,clean,medium,recall,18,According to the text after applying the update for all states what is the resulting value v(s)?,-1,3,1,3,1
+S2,RL,clean,medium,recall,19,What condition is used to stop the efficient iterative policy evaluation?,When updates to each state are less than a small value theta.,5,1,3,1
+S2,RL,clean,medium,recall,20,In the context of policy improvement how is a Greedy Policy defined?,A policy that chooses actions with the best value.,5,1,3,1
+S3,RL,clean,hard,recall,1,What is Dynamic Programming?,A family of optimization and algorithmic techniques that break down a problem into sub-problems recursively.,5,1,3,1
+S3,RL,clean,hard,recall,2,What is the Markov Property?,The property that all states in an MDP are assumed to have.,3,1,2,1
+S3,RL,clean,hard,recall,3,What is the purpose of memoization in Dynamic Programming?,To improve the efficiency of Dynamic Programming by caching solutions to sub-problems.,4,1,3,1
+S3,RL,clean,hard,recall,4,Who coined the term Dynamic Programming?,Richard Bellman in the 1940s/50s,5,1,4,1
+S3,RL,clean,hard,recall,5,What is the name of the sequence used as an example in the text to demonstrate sequential and time series problems?,Fibonacci sequence,4,1,3,1
+S3,RL,clean,hard,recall,6,What is one of the basic properties of a problem that needs to be solved using Dynamic Programming?,Optimal Substructure and Overlapping Sub-problems,4,1,4,1
+S3,RL,clean,hard,recall,7,What is the immediate reward from taking the best action A from a state S in the Bellman Optimality Equation?,The immediate reward from taking the best action A from a state S,2,1,1,1
+S3,RL,clean,hard,recall,8,What does Policy Evaluation (Prediction) in Dynamic Programming entail?,Estimating the value (future discounted cumulative reward) of a state given some policy pi,5,1,3,1
+S3,RL,clean,hard,recall,9,What is a component of the MDP definition?,Policy Evaluation and Policy Improvement,3,0,2,1
+S3,RL,clean,hard,recall,10,What is being used to update the value of each state in the given problem?,The Bellman Equation,4,1,3,1
+S3,RL,clean,hard,recall,11,What type of problem is the gridworld in the given example?,Episodic,4,1,3,1
+S3,RL,clean,hard,recall,12,What is the reward for each transition in the gridworld example?,-1,5,1,3,1
+S3,RL,clean,hard,recall,13,What does the symbol A represent in the given context?,An action set for the agent,3,1,2,1
+S3,RL,clean,hard,recall,14,What is the probability of the agent selecting each action in the action set A?,All have a probability of 0.25,5,1,3,1
+S3,RL,clean,hard,recall,15,What type of path will the agent follow with the uniform random policy?,A random walk,5,1,4,1
+S3,RL,clean,hard,recall,16,What is the stopping condition for the Iterative Policy Evaluation?,When there are no updates,3,0,2,1
+S3,RL,clean,hard,recall,17,What is the Greedy Policy strategy?,Updating the policy to choose the actions with the best value,4,1,3,1
+S3,RL,clean,hard,recall,18,According to the text at what iteration k did the greedy policy become the optimal policy?,At k = 3,5,1,4,1
+S3,RL,clean,hard,recall,19,What is the process called when we repeat the process of evaluating a policy and obtaining another improved policy from it?,Policy Iteration,5,1,3,1
+S3,RL,clean,hard,recall,20,In the context of Policy Iteration what is guaranteed to happen as the process converges?,We converge towards optimality,4,1,3,1
+S4,RL,clean,medium,comprehension,1,What is the typical approach for prioritising states in a priority queue?,Prioritise states by the size of their last value update,4,1,3,0
+S4,RL,clean,medium,comprehension,2,What can focusing on areas of the state-space with higher updates help achieve?,Faster convergence of the algorithm,4,1,3,0
+S4,RL,clean,medium,comprehension,3,In Real-time Dynamic Programming what is used to determine which states are relevant?,The agent's experience and actual encounters,4,1,3,0
+S4,RL,clean,medium,comprehension,4,What happens to the policy in Greedy policy improvement if there are ties?,It will always switch to a deterministic policy unless there are ties.,4,1,3,0
+S4,RL,clean,medium,comprehension,5,Why can Policy Iteration become computationally expensive?,Because it involves looping over all the states for both Policy Evaluation and Policy Improvement.,5,1,3,1
+S4,RL,clean,medium,comprehension,6,In which situation will Policy Iteration stop when updates on all states are too small?,When updates on all states are too small below some defined value theta.,4,1,3,0
+S4,RL,clean,medium,comprehension,7,What is the initial value of v(s) as specified in the text?,0,4,1,3,0
+S4,RL,clean,medium,comprehension,8,The value of a neighbour of a current state in the grid is typically:,0,3,1,2,0
+S4,RL,clean,medium,comprehension,9,What happens when we improve a policy by greedily choosing actions based on their value?,This does not necessarily lead us to the optimal policy as shown in the Simple Gridworld example,4,1,3,1
+S4,RL,clean,medium,comprehension,10,What concept is presented as a process of converging to the optimal policy through iterative improvement?,Policy Iteration,4,1,3,0
+S4,RL,clean,medium,comprehension,11,Why does greedy policy improvement not immediately lead to the optimal policy?,Because v is not necessarily v*.,3,1,3,1
+S4,RL,clean,medium,comprehension,12,What is the reason Richard Bellman coined the term Dynamic Programming?,He wanted to avoid terms that were overly mathematical or gave the wrong connotations,5,1,3,0
+S4,RL,clean,medium,comprehension,13,What is one of the properties required for a problem to solve using Dynamic Programming?,Optimal Substructure,3,1,2,0
+S4,RL,clean,medium,comprehension,14,What is a benefit of Dynamic Programming in the context of MDPs?,Solving MDPs with Dynamic Programming can avoid recomputing sub-problems,4,1,3,0
+S4,RL,clean,medium,comprehension,15,What is the stopping condition for Iterative Policy Evaluation (Efficient)?,When there are no updates to each state.,4,1,2,0
+S4,RL,clean,medium,comprehension,16,What is the goal of improving the policy in Iterative Policy Evaluation?,To find a better policy that maximizes the state values.,4,1,3,0
+S4,RL,clean,medium,comprehension,17,What type of policy is described in the context of improving the policy?,Greedy Policy,4,1,3,0
+S4,RL,clean,medium,comprehension,18,Which of the following statements describes the process of Greedy Policy Improvement?,Selecting the action with the best value to improve the policy,4,1,3,0
+S4,RL,clean,medium,comprehension,19,What happens when improvement stops for all states in the context of Greedy Policy Improvement?,Optimality is reached and the policy is guaranteed to be the best,4,1,3,0
+S4,RL,clean,medium,comprehension,20,What is a key characteristic of Asynchronous Dynamic Programming?,Updating states individually in any order,5,1,4,0
+S5,RL,clean,medium,analysis,1,In the Value Iteration Algorithm what condition is used to determine when to stop updating state values?,When updates to each state are less than some small value,5,1,3,0
+S5,RL,clean,medium,analysis,2,How does the complexity of the algorithm change when adapting to the action-value function?,O(mn) to O(mn^2),2,0,1,0
+S5,RL,clean,medium,analysis,3,What is a key advantage of using the Value Iteration Algorithm compared to other algorithms based on the state-action function?,More efficient computation for achieving the same result,3,1,2,1
+S5,RL,clean,medium,analysis,4,What is the probability of the agent selecting each action under the uniform random policy?,0.25,5,1,3,0
+S5,RL,clean,medium,analysis,5,How can the agent's behavior be described under the uniform random policy?,Essentially a random walk,5,1,4,0
+S5,RL,clean,medium,analysis,6,What is the outcome of sampling all actions in the agent's action set under the uniform random policy?,Each action will be selected with equal probability,4,1,3,0
+S5,RL,clean,medium,analysis,7,What is the main difference between Asynchronous Dynamic Programming and Synchronous Dynamic Programming?,Asynchronous DP updates states in any order whereas Synchronous DP updates states at one go.,5,1,3,1
+S5,RL,clean,medium,analysis,8,What is the benefit of In-place Value Iteration compared to Synchronous Value Iteration?,In-place Value Iteration updates the values directly without needing to store previous values.,4,1,3,0
+S5,RL,clean,medium,analysis,9,How does In-place Value Iteration update the values compared to Synchronous Value Iteration?,In-place Value Iteration updates the values directly in the same vector.,5,1,3,0
+S5,RL,clean,medium,analysis,10,What is proposed as a way to help the algorithm converge even faster?,Choosing a smarter state ordering,4,1,3,0
+S5,RL,clean,medium,analysis,11,Why are states with a large error more likely to propagate error on their predecessors?,They are intuitively likely to propagate more error,3,1,2,0
+S5,RL,clean,medium,analysis,12,What is prioritised sweeping designed to focus on?,Stabilising the areas of the state-space that are more active in their updates,4,1,3,0
+S5,RL,clean,medium,analysis,13,What are the two basic properties that a problem needs to have in order to use Dynamic Programming?,Optimal Substructure and Overlapping Sub-problems,5,1,3,0
+S5,RL,clean,medium,analysis,14,Why was the term Dynamic Programming coined by Richard Bellman?,Because he wanted to avoid mathematical or negative connotations,4,1,3,0
+S5,RL,clean,medium,analysis,15,What is the benefit of solving sub-problems in Dynamic Programming?,Solving them once saves us re-computation when they re-occur,4,1,3,0
+S5,RL,clean,medium,analysis,16,What is the main difference between Value Iteration and Dynamic Programming according to the source text?,Dynamic Programming is used to estimate the value function directly without any policy whereas Value Iteration is used to update the value function iteratively.,2,0,1,0
+S5,RL,clean,medium,analysis,17,How do we update the value function according to the source text?,Update the value function using the best action according to the value function for each state.,4,1,3,0
+S5,RL,clean,medium,analysis,18,What is the result of applying Value Iteration according to the source text?,Convergence to the optimal solution,5,1,3,0
+S5,RL,clean,medium,analysis,19,What happens to states closer to those that give high rewards during the policy evaluation process?,They start to get a higher value,4,1,3,0
+S5,RL,clean,medium,analysis,20,How are state values updated in the Bellman Equation?,Using a linear combination of its successors and rewards,4,1,3,0
+S6,RL,clean,medium,application,1,In the context of Dynamic Programming what does the concept of memoization refer to?,Storing solutions to sub-problems that reoccur frequently to avoid re-computation,5,1,3,0
+S6,RL,clean,medium,application,2,A company uses Dynamic Programming to optimize its production process which involves multiple sequential steps. What benefit does this approach provide?,It helps to break down the problem into simpler more manageable sub-problems,4,1,3,1
+S6,RL,clean,medium,application,3,A game involves a finite number of time steps and a player can take actions to move from one state to another receiving rewards or penalties. What optimization technique is used to find the optimal policy in such a game?,Dynamic Programming,3,1,2,0
+S6,RL,clean,medium,application,4,To make the algorithm converge even faster what can be done?,Choosing a smarter state ordering,4,1,3,0
+S6,RL,clean,medium,application,5,What is the typical approach to prioritizing states in a priority queue?,Prioritizing by the size of their last value update,5,1,3,0
+S6,RL,clean,medium,application,6,What happens after each time step in Real-time Dynamic Programming?,The value and policy information are computed and the agent decides the next action,4,1,3,0
+S6,RL,clean,medium,application,7,Which of the following stopping conditions can be used during the Policy Evaluation step of Policy Iteration?,When updates on all states are too small below some defined value theta.,4,1,3,0
+S6,RL,clean,medium,application,8,What will always happen after Policy Improvement if there are no ties?,Policy Iteration will always switch to a deterministic policy.,4,1,3,0
+S6,RL,clean,medium,application,9,Which of the following can be done to improve the efficiency of Policy Iteration in terms of computational expense?,Stopping Policy Iteration when a maximum limit K on the number of iterations is reached.,3,1,3,0
+S6,RL,clean,medium,application,10,When does the Iterative Policy Evaluation converge?,When the updates to each state are less than some small value theta.,4,1,3,0
+S6,RL,clean,medium,application,11,What type of policy is it called when the actions are chosen based on the best value?,Greedy Policy,4,1,3,0
+S6,RL,clean,medium,application,12,Why does the text say it stopped updating even though v had not yet converged to v*?,Because the corresponding greedy policy was already the optimal policy.,4,1,3,0
+S6,RL,clean,medium,application,13,What is the goal of the agent in the Simple Gridworld example?,Reach one of the grey squares as quickly as possible (maximise sum of rewards),5,1,3,0
+S6,RL,clean,medium,application,14,In the Simple Gridworld example what action is the agent unable to perform?,Moving off the grid,4,1,3,0
+S6,RL,clean,medium,application,15,In the Bellman Equation what is the term that represents the current discounted value of the successor state?,gamma*v(s'),2,1,1,0
+S6,RL,clean,medium,application,16,When is synchronous dynamic programming considered inefficient?,When all states are updated at one go before proceeding to the next iteration,4,1,3,0
+S6,RL,clean,medium,application,17,What benefit does in-place DP have over synchronous Value Iteration?,It stores only one vector requiring half the memory,4,1,3,0
+S6,RL,clean,medium,application,18,What is a characteristic of a DP algorithm with an in-place approach?,It updates states directly in one vector requiring half the memory and converging faster,4,1,3,0
+S6,RL,clean,medium,application,19,What is a key component of Dynamic Programming (DP) for solving Markov Decision Processes (MDPs)?,Policy Evaluation and Improvement,4,1,3,0
+S6,RL,clean,medium,application,20,Why is caching or memoization useful in the context of the Bellman Optimality Equation?,To speed up calculations and reduce computational complexity,4,1,3,0
+S7,RL,summarise,medium,recall,1,According to the Bellman Optimality Equation a state's value is recursively decomposed into which two components?,The immediate reward from the best action and the value of the resulting successor state,5,1,4,1
+S7,RL,summarise,medium,recall,2,When solving Markov Decision Processes with Dynamic Programming which of the following is NOT required to be known in advance?,The learning rate alpha,4,1,3,1
+S7,RL,summarise,medium,recall,3,During policy improvement in Dynamic Programming how does the new policy compare to the original policy?,v^pi'(s) is greater than or equal to v^pi(s) for all states s,5,1,3,1
+S7,RL,summarise,medium,recall,4,What is the Bellman update formula for v(s) as given in the text?,v(s)=sum_a pi(a|s) sum_{s' r} p(s' r|s a)[r + gamma v(s')],4,1,3,1
+S7,RL,summarise,medium,recall,5,In the example what value does the deterministic policy pi(a|s) take?,1,4,1,3,1
+S7,RL,summarise,medium,recall,6,What is the constant reward r used in the example?,-1,5,1,3,1
+S7,RL,summarise,medium,recall,7,What does the action-value function q(s a) represent according to the text?,The expected immediate reward plus the expected discounted value of the successor state.,5,1,4,1
+S7,RL,summarise,medium,recall,8,How is the best action from a state s identified in the source text?,By choosing the action that maximises q(s a).,5,1,3,1
+S7,RL,summarise,medium,recall,9,When performing greedy policy improvement on a deterministic policy what does the new policy pi'(s) become?,pi'(s) = argmax_a q(s a).,5,1,3,1
+S7,RL,summarise,medium,recall,10,According to the text what relationship holds between the maximum action-value and the action-value of the policy for a state s?,max_a q(s a) = q(s pi(s)),4,1,2,1
+S7,RL,summarise,medium,recall,11,In policy iteration what does the state-value v(s) equal according to the passage?,v(s) = q(s pi(s)),4,1,2,1
+S7,RL,summarise,medium,recall,12,The text states that the optimal action for each state s maximizes which function?,the action-value function q(s a),5,1,3,1
+S7,RL,summarise,medium,recall,13,What data structure is used to store states in prioritized sweeping?,Priority queue,5,1,3,1
+S7,RL,summarise,medium,recall,14,In prioritized sweeping which states are processed first?,States with the largest last value update,5,1,3,1
+S7,RL,summarise,medium,recall,15,Real-time dynamic programming updates only which states?,Only the states the agent actually encounters,5,1,4,1
+S8,RL,baseline,—,—,1,What is Dynamic Programming?,A family of optimization and algorithmic techniques that break down a problem into sub-problems recursively.,5,1,3,-1
+S8,RL,baseline,—,—,2,What are the two basic properties of a problem that needs to be satisfied in order to use Dynamic Programming?,Optimal Substructure and Overlapping Sub-problems,5,1,3,-1
+S8,RL,baseline,—,—,3,What is Dynamic Programming according to the given text?,Dynamic Programming assumes we have full knowledge of the MDP.,3,1,2,-1
+S8,RL,baseline,—,—,4,How is the value of a terminal state updated?,v_s = 0,5,1,3,-1
+S8,RL,baseline,—,—,5,What is the goal for the agent in the Simple Gridworld example?,To reach one of the grey squares as quickly as possible,5,1,3,-1
+S8,RL,baseline,—,—,6,What type of policy does the agent follow according to the text?,A uniform random policy where each action has a probability of 0.25.,5,1,3,-1
+S8,RL,baseline,—,—,7,What happens to the value function as k approaches infinity?,It will converge,4,1,3,-1
+S8,RL,baseline,—,—,8,How does the Iterative Policy Evaluation (Efficient) algorithm stop?,When the updates to each state are less than some small value theta,5,1,3,-1
+S8,RL,baseline,—,—,9,What is the process called when we repeat the process of evaluating the improved policy and obtaining another improved policy from it?,Policy Iteration,5,1,3,-1
+S8,RL,baseline,—,—,10,What is the best action from a state in decision-making?,The action that gives the best expected immediate reward and expected future return,5,1,3,-1
+S8,RL,baseline,—,—,11,What is a possible stopping condition in Policy Iteration to prevent it from becoming computationally expensive?,Stopping when updates on all states are too small below some defined value theta.,3,1,3,-1
+S8,RL,baseline,—,—,12,According to the text how is the value function updated in Value Iteration?,Using the Bellman Optimality Equation iteratively to update the value of each state directly.,4,1,3,-1
+S8,RL,baseline,—,—,13,What is the complexity of the algorithms per iteration?,O(mn^2),3,1,2,-1
+S8,RL,baseline,—,—,14,What is a characteristic of In-place Dynamic Programming?,It needs half the memory and converges faster,5,1,3,-1
+S8,RL,baseline,—,—,15,What is the typical approach to prioritise states in the Prioritised Sweeping algorithm?,Prioritise the states by the size of their last value update (difference between the old value and new value).,5,1,3,-1
+S8,RL,baseline,—,—,16,What is a limitation of Dynamic Programming due to its full-width backup approach?,It expands all possible successors of each state and propagates their values back up.,3,1,2,-1
+S9,Ethics,clean,easy,recall,1,What is the main goal of content moderation?,To balance user safety with freedom of expression,4,1,3,1
+S9,Ethics,clean,easy,recall,2,What effect can strict AI moderation have on marginalized groups?,It suppresses their legitimate speech,4,1,3,1
+S9,Ethics,clean,easy,recall,3,What can happen if AI models are trained on user reports?,They inherit and amplify reporting biases,4,1,3,1
+S9,Ethics,clean,easy,recall,4,What determines the strength of privacy?,The value of epsilon also known as privacy budget,5,1,3,1
+S9,Ethics,clean,easy,recall,5,What is a common noise distribution for integer or real-valued data?,Laplace,5,1,3,1
+S9,Ethics,clean,easy,recall,6,What is a challenge in the design and evaluation of systems that use AI?,Determining whether an individual's liberty should be influenced by group statistics or individual case evidence,4,1,3,1
+S9,Ethics,clean,easy,recall,7,What type of data might an AI system inadvertently use?,Proxy variables like postcode,4,1,3,1
+S9,Ethics,clean,easy,recall,8,What should be considered a viable choice in the problem-framing stage?,Explore non-AI solutions,3,1,2,1
+S9,Ethics,clean,easy,recall,9,What is another term for History Bias in AI?,Past societal discrimination embedded in training data,3,0,2,1
+S9,Ethics,clean,easy,recall,10,What is a result of Representation Bias in AI?,Poor model performance and results in poor model performance and accuracy for underrepresented populations,3,1,2,1
+S9,Ethics,clean,easy,recall,11,What is the main challenge presented by AI-driven decision systems?,Balancing explainability with privacy,4,1,3,1
+S9,Ethics,clean,easy,recall,12,What is the goal of Explainability in AI?,To reveal how AI decisions are made,4,1,3,1
+S9,Ethics,clean,easy,recall,13,What might happen if different decision thresholds are used for each group?,Missed or over-tested patients will experience unfair treatment,3,1,2,1
+S9,Ethics,clean,easy,recall,14,What is a characteristic of biased training data?,It often contains unfair decisions from history.,4,1,3,1
+S9,Ethics,clean,easy,recall,15,What can superficial corrections to models accomplish?,They can hide the problem without fixing the root cause.,5,1,4,1
+S9,Ethics,clean,easy,recall,16,What does the term Predictive Parity refer to in the given text?,Ensuring that individuals who truly deserve a positive outcome are equally likely to receive that outcome across groups.,4,1,3,1
+S9,Ethics,clean,easy,recall,17,What aspect is Equalized Odds a stronger version of Predictive Parity?,False Positive Rate,3,1,2,1
+S9,Ethics,clean,easy,recall,18,What is the goal of Calibration?,To ensure that predictions are accurate across all groups.,4,1,3,1
+S9,Ethics,clean,easy,recall,19,What do fairness metrics aim to do?,Quantify disparities,5,1,4,1
+S9,Ethics,clean,easy,recall,20,Why is it difficult to satisfy all fairness definitions simultaneously?,Because it's often impossible as shown by the impossibility theorem,5,1,3,1
+S10,Ethics,clean,medium,recall,1,Why can't fairness metrics tell us which group's risk should be minimized or prioritized?,They only quantify disparities,5,1,3,1
+S10,Ethics,clean,medium,recall,2,What does the impossibility theorem in fairness research show?,It's often impossible to satisfy all conflicting fairness definitions and simultaneously achieve multiple fairness goals,5,1,3,1
+S10,Ethics,clean,medium,recall,3,What is a concern when algorithms use proxy variables that correlate with protected attributes like race?,Bias in AI-driven decisions,4,1,3,1
+S10,Ethics,clean,medium,recall,4,According to the Framework for Ethical Deliberation what should be considered when defining a problem?,Non-AI solutions and do not deploy as a viable choice,4,1,3,1
+S10,Ethics,clean,medium,recall,5,What does an AI system represent when biases are consistently applied?,Systematic injustice,4,1,3,1
+S10,Ethics,clean,medium,recall,6,What is the name of the tool used for assessing recidivism risk in the COMPAS case study?,COMPAS (Correctional Offender Management Profiling for Alternative Sanctions),5,1,3,1
+S10,Ethics,clean,medium,recall,7,What happens when a model is trained using a biased benchmark?,It replicates existing societal injustices,4,1,3,1
+S10,Ethics,clean,medium,recall,8,What is the name of the fairness definition that states predicted risk scores should match actual re-offense rates across groups?,Predictive Parity,5,1,3,1
+S10,Ethics,clean,medium,recall,9,According to the text what does fairness in AI often mean?,Making difficult choices by balancing competing fairness goals,4,1,3,1
+S10,Ethics,clean,medium,recall,10,What is implied by the text when it states fairness often creates a dilemma?,Fairness is not compatible with other AI goals,3,1,3,1
+S10,Ethics,clean,medium,recall,11,What must AI developers do when striving for fairness in developing AI systems?,Document the chosen fairness metric and explain why others were not prioritized,5,1,3,1
+S10,Ethics,clean,medium,recall,12,What is a primary reason for public-facing AI systems to provide clear explanations for negative decisions?,Preventing potential harms to society and ensuring democratic accountability.,4,1,3,1
+S10,Ethics,clean,medium,recall,13,What type of privacy is used when possible to minimize privacy risks in AI systems?,Differential privacy (DP),5,1,3,1
+S10,Ethics,clean,medium,recall,14,According to the source text what may sometimes take precedence over maximum privacy for public-facing AI systems?,Legal obligations for transparency,3,1,2,1
+S10,Ethics,clean,medium,recall,15,What is a concern with using different decision thresholds for each group when it comes to treatment volumes?,It might lead to unequal access to treatment.,4,1,3,1
+S10,Ethics,clean,medium,recall,16,What is the goal of the concept of Explainability in AI-driven decision systems?,To reveal how AI decisions are made,4,1,3,1
+S10,Ethics,clean,medium,recall,17,Who might prioritize patient confidentiality over explainability in medical AI?,Patients,3,1,2,1
+S10,Ethics,clean,medium,recall,18,According to the text what are the risks associated with leaking sensitive information from AI models?,Stigma patient harm and misuse of patient information,4,1,3,1
+S10,Ethics,clean,medium,recall,19,What is the purpose of applying Differential Privacy (DP) to explanation elements in AI models?,To protect patient information and add controlled noise,4,1,3,1
+S10,Ethics,clean,medium,recall,20,What is a consequence of adding too much noise to AI model explanations?,Explanations become less clinically useful,5,1,4,1
+S11,Ethics,clean,hard,recall,1,What happens when a single model is applied to groups with inherently different characteristics or behaviors?,Aggregation bias,3,1,2,1
+S11,Ethics,clean,hard,recall,2,What type of bias occurs when models optimized for men might misinterpret symptoms in women?,Deployment bias,4,1,3,1
+S11,Ethics,clean,hard,recall,3,According to the text what defines individual fairness in AI?,Deciding what similar means is often a subjective choice.,3,0,2,1
+S11,Ethics,clean,hard,recall,4,What makes it impossible to satisfy all conflicting fairness definitions simultaneously?,The impossibility theorem in fairness research,5,1,3,1
+S11,Ethics,clean,hard,recall,5,What should AI systems deployed in sensitive areas clearly state?,The specific fairness metric they aim to achieve,5,1,3,1
+S11,Ethics,clean,hard,recall,6,What is the nature of the limitation on achieving multiple fairness goals in AI?,A fundamental mathematical limitation,5,1,3,1
+S11,Ethics,clean,hard,recall,7,What might happen if a model is designed to make positive predictions equal for all groups?,The overall prediction rates might become unequal,4,1,3,1
+S11,Ethics,clean,hard,recall,8,Why is there no one-size-fits-all solution for fairness in AI?,Because fairness often creates a dilemma and is a choice among incompatible ideals,5,1,3,1
+S11,Ethics,clean,hard,recall,9,What is the system's purpose mentioned in the context of risk analysis?,To understand the system's purpose who uses it and the specific information provided when an application is denied,3,1,2,1
+S11,Ethics,clean,hard,recall,10,What type of data manipulation is considered a risk in the given context?,Data leakage,4,1,3,1
+S11,Ethics,clean,hard,recall,11,What term is mentioned as a method for evaluating privacy protection?,epsilon-privacy budget,4,1,3,1
+S11,Ethics,clean,hard,recall,12,What does the author imply happens when we treat value choices as mere metrics?,We conceal the underlying ethical and political decisions.,4,1,3,1
+S11,Ethics,clean,hard,recall,13,What is the example given in the text for a social decision with real-world consequences?,Setting a privacy budget for differential privacy.,3,1,2,1
+S11,Ethics,clean,hard,recall,14,What must complement technical excellence in AI development according to the author?,Ethical analysis and democratic decision-making.,4,1,3,1
+S11,Ethics,clean,hard,recall,15,What is the primary concern for public-facing AI systems especially in sensitive domains?,Democratic accountability and oversight,4,1,3,1
+S11,Ethics,clean,hard,recall,16,According to the text what is the purpose of differential privacy (DP) in AI systems?,To minimize privacy risks by limiting data use,4,1,3,1
+S11,Ethics,clean,hard,recall,17,What is required when explainability takes priority over privacy in AI systems?,Minimizing privacy risks by implementing strong access controls,4,1,3,1
+S11,Ethics,clean,hard,recall,18,What type of bias arises when training data doesn't adequately represent certain groups?,Representation Bias,5,1,3,1
+S11,Ethics,clean,hard,recall,19,What is a common issue with using proxies in data collection to measure a concept?,Poorly captures the intended concept,3,1,2,1
+S11,Ethics,clean,hard,recall,20,What is required to address historical bias in AI systems?,Critical review of data sources with their collection methods,5,1,3,1
+S12,Ethics,clean,medium,comprehension,1,What is Representation Bias in AI according to the text?,When training data doesn't adequately represent certain groups.,5,1,3,0
+S12,Ethics,clean,medium,comprehension,2,According to the text how can Measurement Bias arise in AI systems?,When proxies used in data collection poorly capture the intended concept.,5,1,3,0
+S12,Ethics,clean,medium,comprehension,3,According to the text what type of bias occurs when past societal discrimination is embedded in training data?,Historical Bias,5,1,3,0
+S12,Ethics,clean,medium,comprehension,4,What is the purpose of understanding the system's purpose before deciding on information content?,To clarify the system's purpose who uses it and the potential impact or consequences,4,1,2,0
+S12,Ethics,clean,medium,comprehension,5,Why might attackers exploit shared information from the system?,To manipulate the system,3,1,2,0
+S12,Ethics,clean,medium,comprehension,6,What is a goal when implementing strict access controls to mitigate risks?,To ensure both legal compliance and practical impact,4,1,3,0
+S12,Ethics,clean,medium,comprehension,7,According to the source text what is a fundamental limitation in achieving fairness goals in AI.,A mathematical constraint,4,1,3,0
+S12,Ethics,clean,medium,comprehension,8,When trying to achieve fairness in AI which of the following statements is true according to the source text.,Striving for equal outcomes often creates a dilemma,4,1,3,1
+S12,Ethics,clean,medium,comprehension,9,According to the source text what must be considered when implementing fairness in AI systems.,The context for whom and why fairness is most important,5,1,3,1
+S12,Ethics,clean,medium,comprehension,10,What is the goal of Equalized Odds?,Equalizing true positive and false positive rates across groups,5,1,3,0
+S12,Ethics,clean,medium,comprehension,11,What does Predictive Parity Calibration ensure?,Equalizing the accuracy of positive predictions across groups,4,1,3,0
+S12,Ethics,clean,medium,comprehension,12,Why are these metrics important?,They help to clarify the ethical choices being made and influence how errors are distributed,4,1,3,0
+S12,Ethics,clean,medium,comprehension,13,What focus does Equal Opportunity have on ensuring that the AI correctly identifies?,positive cases (true positives) at the same rate for all groups,4,1,3,0
+S12,Ethics,clean,medium,comprehension,14,What is a possible downside of striving for Predictive Parity in AI models?,unequal rates of correctly identified positive cases,4,1,3,1
+S12,Ethics,clean,medium,comprehension,15,What does the source text state is required to achieve fairness in medicine beyond technical fixes in AI models?,public health interventions,4,1,3,0
+S12,Ethics,clean,medium,comprehension,16,What is a core challenge in AI-driven decisions?,Determining whether an individual's liberty should be influenced by group statistics or individual case evidence,5,1,3,0
+S12,Ethics,clean,medium,comprehension,17,What is the purpose of Consequence Analysis in the framework for Ethical Deliberation?,To evaluate the potential negative impacts of various design choices and clarify who gains and who is disadvantaged,4,1,3,0
+S12,Ethics,clean,medium,comprehension,18,What is a risk of using proxy variables in algorithms?,Due-process concerns about discrimination,4,1,3,1
+S12,Ethics,clean,medium,comprehension,19,Which process does ethical analysis start with?,Identifying parties affected by an AI system and understanding their interests,5,1,3,0
+S12,Ethics,clean,medium,comprehension,20,Why is setting a privacy budget a social decision?,Because it defines the acceptable level of privacy loss with real-world consequences,5,1,4,1
+S13,Ethics,clean,medium,analysis,1,What type of attack aims to reconstruct original sensitive training data by repeatedly querying the model's explanation interface?,Model Inversion,5,1,4,0
+S13,Ethics,clean,medium,analysis,2,Why might an attacker infer a sensitive attribute indirectly if an explanation highlights non-sensitive features that are strongly correlated with a sensitive attribute?,Because an attacker might infer the sensitive attribute indirectly,3,1,2,0
+S13,Ethics,clean,medium,analysis,3,What type of solution to the tension between model transparency and data confidentiality is not mentioned?,A one-size-fits-all solution,4,1,3,0
+S13,Ethics,clean,medium,analysis,4,What is the core challenge in determining whether an individual's liberty should be influenced by AI-driven decisions?,Determining whether an individual's liberty should be influenced by group statistics derived from AI,4,1,3,0
+S13,Ethics,clean,medium,analysis,5,What is the purpose of exploring non-AI solutions in the framework for ethical deliberation?,To clearly define the problem and consider alternative solutions,4,1,3,0
+S13,Ethics,clean,medium,analysis,6,What is the outcome of consistently applied biases in an AI system?,Systematic injustice,5,1,4,0
+S13,Ethics,clean,medium,analysis,7,What can be a more ethical approach than relying on opaque predictive models?,Clear rule-based policies that everyone can understand and audit,5,1,3,0
+S13,Ethics,clean,medium,analysis,8,Why was Amazon's resume screener biased against women?,Because the hiring data was dominated by male candidates,5,1,4,1
+S13,Ethics,clean,medium,analysis,9,Why is simply aiming for equal hiring numbers a risk?,Because it may mask underlying biases,4,1,3,1
+S13,Ethics,clean,medium,analysis,10,What is the main problem with using biased training data?,Models will faithfully reproduce biased patterns.,5,1,3,0
+S13,Ethics,clean,medium,analysis,11,Why do cosmetic changes to models often fail?,Because they don't address the root cause of bias.,5,1,3,0
+S13,Ethics,clean,medium,analysis,12,What is the Garbage In Garbage Out problem in the context of model training?,Models will faithfully reproduce biased patterns.,4,1,3,0
+S13,Ethics,clean,medium,analysis,13,What can happen if a model relies on biased benchmarks for validation?,It can result in models that merely replicate existing societal injustices.,5,1,3,0
+S13,Ethics,clean,medium,analysis,14,According to the source text what fairness definition did the vendor claim COMPAS satisfied?,Predictive parity,5,1,3,0
+S13,Ethics,clean,medium,analysis,15,Why could different definitions of fairness lead to conflicting conclusions about COMPAS' bias?,Because both claims were mathematically true.,4,1,3,1
+S13,Ethics,clean,medium,analysis,16,What is the relationship between the choice of a diagnostic threshold and trade-offs in medical AI systems?,It directly impacts how benefits and burdens are distributed across patient populations,5,1,3,1
+S13,Ethics,clean,medium,analysis,17,What factor reveals how technical choices can reinforce existing inequalities?,Power dynamics and imbalances between organizations and individuals,4,1,3,0
+S13,Ethics,clean,medium,analysis,18,What is the nature of the limitation to achieving fairness goals in AI?,A fundamental mathematical limitation not just an engineering challenge,5,1,3,0
+S13,Ethics,clean,medium,analysis,19,What can happen when striving for equal positive predictions across groups?,Unequal error rates are ensured but overall prediction rates become equal,3,1,3,0
+S13,Ethics,clean,medium,analysis,20,How should the chosen fairness metric in AI be documented?,It should be documented along with an explanation of why other metrics were not prioritized,5,1,3,0
+S14,Ethics,clean,medium,application,1,A developer is trying to identify the type of bias in AI that occurs when training data doesn't adequately represent certain groups.,Representation Bias,4,1,3,0
+S14,Ethics,clean,medium,application,2,A person is developing an AI model to predict crime rates and uses arrest rates as a measure. What type of bias might this model be suffering from?,Measurement Bias,4,1,3,1
+S14,Ethics,clean,medium,application,3,To address the issue of Historical Bias in AI which of the following steps should be taken?,Reviewing data sources and their collection methods,4,1,3,0
+S14,Ethics,clean,medium,application,4,An organization is required to provide a transparent explanation for an AI-driven decision but also needs to protect user data. What challenge does this create?,The organization must balance explaining decisions without using more personal data.,4,1,3,1
+S14,Ethics,clean,medium,application,5,A company in the finance sector is making AI-driven decisions. What should they do to comply with legal obligations?,Develop a compliance matrix to track AI system obligations.,4,1,3,1
+S14,Ethics,clean,medium,application,6,To balance transparency and data protection a company can use which of the following strategies?,Implement layered transparency and document decisions.,4,1,3,0
+S14,Ethics,clean,medium,application,7,If we strive for equal outcomes in demographic parity across different groups what might be a consequence?,Unequal error rates across groups will occur.,4,1,3,0
+S14,Ethics,clean,medium,application,8,If aiming for equal error rates across different groups in equal opportunity what could happen?,The overall prediction rates will become equal but unequal error rates might occur.,3,0,2,0
+S14,Ethics,clean,medium,application,9,What is the main implication of the mathematical limitation in fairness goals?,We must choose among incompatible ideals due to a fundamental mathematical limitation.,5,1,4,0
+S14,Ethics,clean,medium,application,10,In what scenarios could sensitive information leaked from AI models lead to harm?,Individual patients patient groups used for training and healthcare providers,4,1,3,0
+S14,Ethics,clean,medium,application,11,What is a consequence of adding too much noise when applying Differential Privacy?,Making explanations less clinically useful,5,1,4,0
+S14,Ethics,clean,medium,application,12,Who might view detailed factors in an explanation under a role-based access control system?,Psychiatrists,4,1,3,0
+S14,Ethics,clean,medium,application,13,When developing and deploying AI systems whose interests often diverge?,Individuals interacting with the system and broader society,4,1,3,0
+S14,Ethics,clean,medium,application,14,What happens if a medical AI system's sensitivity is prioritized over specificity?,True positives are caught but false positives are not avoided,3,1,3,1
+S14,Ethics,clean,medium,application,15,What is crucial for identifying which stakeholder priorities influence the validation process?,Medical AI system explanations and patient feedback,3,1,2,0
+S14,Ethics,clean,medium,application,16,What happens when AI systems incorrectly flag and remove legitimate content?,It stifles free speech disproportionately impacting marginalized communities.,5,1,4,0
+S14,Ethics,clean,medium,application,17,A company wants to create an AI-powered platform. What moderation strategy would allow malicious actors to adapt and bypass detection systems?,Sharing transparent moderation guidelines openly.,4,1,3,1
+S14,Ethics,clean,medium,application,18,How can historical arrest data in predictive policing models lead to biased predictions?,It amplifies existing societal inequalities by perpetuating past policing patterns.,5,1,3,0
+S14,Ethics,clean,medium,application,19,An attacker can infer a sensitive attribute even if it's intentionally excluded from the model input.,True,3,1,2,0
+S14,Ethics,clean,medium,application,20,What type of attack aims to reconstruct original sensitive training data by repeatedly querying the model's explanation interface?,Model Inversion,5,1,4,0
+S15,Ethics,summarise,medium,recall,1,What is one of the common noise distributions used to achieve differential privacy?,Laplace and Gaussian,5,1,3,1
+S15,Ethics,summarise,medium,recall,2,What determines the strength of privacy in differential privacy?,Privacy budget epsilon,5,1,3,1
+S15,Ethics,summarise,medium,recall,3,What happens when epsilon is 0 in differential privacy?,Perfect but unusable privacy,4,1,3,1
+S15,Ethics,summarise,medium,recall,4,What is the equalized odds fairness definition according to the text?,Black defendants had a significantly higher false positive rate than white defendants.,3,1,2,1
+S15,Ethics,summarise,medium,recall,5,According to the text what can using biased benchmarks cause?,Perpetuating existing societal injustices.,4,1,3,1
+S15,Ethics,summarise,medium,recall,6,What method can be used to prevent biased results according to the text?,Validating models with diverse bias-aware test datasets.,4,1,3,1
+S15,Ethics,summarise,medium,recall,7,What is one of the risks associated with leaked sensitive information in clinical settings?,Patient harm misuse and stigma,4,1,3,1
+S15,Ethics,summarise,medium,recall,8,What technique can reconstruct original patient data from small clinical datasets?,Aggregated Explanation Mining,3,1,2,1
+S15,Ethics,summarise,medium,recall,9,What can be tailored based on user roles in clinical settings?,Level of detail in explanations,4,1,3,1
+S15,Ethics,summarise,medium,recall,10,What can result from prioritizing efficiency over accountability in AI system development and deployment?,Unequal treatment of interests among stakeholders,4,1,3,1
+S15,Ethics,summarise,medium,recall,11,Who typically has a voice in debates surrounding AI system development according to the text?,Individuals interacting with the system and organizations developing it,3,1,2,1
+S15,Ethics,summarise,medium,recall,12,What are AI model explanations crucial for identifying in the context of Medical Diagnosis AI?,Trade-offs between sensitivity and specificity,4,1,3,1
+S15,Ethics,summarise,medium,recall,13,Who should be considered as stakeholders when developing a system?,Applicants lenders regulators and customers,3,0,1,1
+S15,Ethics,summarise,medium,recall,14,What should be considered when setting precise thresholds to mitigate privacy risks?,Whether they can be manipulated and how sensitive data can be inferred from them,4,1,3,1
+S15,Ethics,summarise,medium,recall,15,What strategy can be proposed to reduce identified risks without minimizing the usefulness of the system?,Maintaining usefulness while minimizing data leakage,4,1,3,1
+S15,Ethics,summarise,medium,recall,16,What is the impossibility theorem in fairness research according to the source text?,A concept that states it's often impossible to satisfy all conflicting fairness definitions simultaneously.,5,1,3,1
+S15,Ethics,summarise,medium,recall,17,What should AI systems deployed in sensitive areas clearly state according to the source text?,The specific fairness metric they aim to achieve and a strong justification for that choice.,5,1,3,1
+S15,Ethics,summarise,medium,recall,18,Why is it essential for AI systems deployed in sensitive areas to clearly state the specific fairness metric they aim to achieve?,Because it's often impossible to satisfy all conflicting fairness definitions simultaneously.,4,1,3,1
+S15,Ethics,summarise,medium,recall,19,What is one of the competing obligations required by the GDPR?,data privacy,3,1,2,1
+S15,Ethics,summarise,medium,recall,20,How do organizations provide clear explanations for decisions under the GDPR?,by defining meaningful explanation contextually,4,1,3,1
+S16,Ethics,baseline,—,—,1,What type of bias occurs when proxies used in data collection poorly capture the intended concept?,Measurement Bias,5,1,3,-1
+S16,Ethics,baseline,—,—,2,What happens when a single model is applied to groups with inherently different characteristics or behaviors?,Aggregation bias happens when a single model is applied to groups with inherently different characteristics or behaviors.,3,1,2,-1
+S16,Ethics,baseline,—,—,3,What does Predictive Parity Calibration require in order to be satisfied?,Ensuring that for any given predicted probability the actual likelihood of a positive outcome is consistent across groups.,5,1,3,-1
+S16,Ethics,baseline,—,—,4,What is a fundamental mathematical limitation when it comes to achieving fairness goals in AI?,The actual rates of an outcome differ between groups leading to a fundamental mathematical limitation.,4,1,3,-1
+S16,Ethics,baseline,—,—,5,What would happen if models are relied upon solely with biased benchmarks?,Models that merely replicate existing societal injustices will be created.,5,1,3,-1
+S16,Ethics,baseline,—,—,6,What will models learn from training data if it reflects historical discrimination?,Models will learn to associate certain groups with lower merit.,5,1,3,-1
+S16,Ethics,baseline,—,—,7,What can be a more ethical approach in cases where historical data is deeply flawed?,Applying clear rule-based policies,5,1,4,-1
+S16,Ethics,baseline,—,—,8,Why do AI-driven decision systems present a challenge in balancing explainability and privacy?,Explainability requires revealing how AI decisions are made but privacy seeks to limit access to individual data.,5,1,4,-1
+S16,Ethics,baseline,—,—,9,What is an example of how attackers use explanations to infer sensitive data?,They look for non-sensitive features that are strongly correlated with a sensitive attribute,4,1,3,-1
+S16,Ethics,baseline,—,—,10,Choosing epsilon=0 provides what level of privacy?,perfect but unusable output,4,1,3,-1
+S16,Ethics,baseline,—,—,11,What is a way to protect patient privacy when providing explanations from AI models in clinical settings?,All of the above,4,1,3,-1
+S16,Ethics,baseline,—,—,12,How do organizations make decisions based on risk assessments under GDPR?,By defining meaningful explanation per context and documenting trade-offs,4,1,3,-1
+S16,Ethics,baseline,—,—,13,What is crucial for public trust and oversight in public-facing AI systems particularly in sensitive domains?,Careful controlled use of data and democratic oversight,3,1,2,-1
+S16,Ethics,baseline,—,—,14,What is the purpose of proposing mitigations in the context of data privacy risks?,To suggest methods to reduce identified risks and maintain data usefulness,4,1,3,-1
+S16,Ethics,baseline,—,—,15,What is the role of technical excellence in AI development according to the text?,Technical excellence in AI development should complement the democratic process of setting societal values.,4,1,3,-1
+S16,Ethics,baseline,—,—,16,Who determines how benefits and burdens are distributed across patient populations when AI systems are used for medical diagnosis?,The choice of a diagnostic threshold directly impacts this distribution.,3,1,2,-1
+S16,Ethics,baseline,—,—,17,What does Predictive Parity strive to ensure in the context of AI diagnostics?,That among all individuals predicted to have a condition the proportion who actually have it is consistent,4,1,3,-1
+S16,Ethics,baseline,—,—,18,What can strict content moderation unintentionally suppress?,Legitimate speech including that of marginalized groups or satire,5,1,4,-1
+S16,Ethics,baseline,—,—,19,What does the Framework for Ethical Deliberation: Mapping the Dilemma suggest for a problem before deploying an AI system?,Clearly define the problem the purpose of using AI and explore non-AI solutions.,5,1,3,-1
