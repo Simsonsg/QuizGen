@@ -1,11 +1,5 @@
 """
-Results analysis script for AutoQuiz evaluation.
-
-Reads all session JSON files from data/output/ and produces summary
-statistics for the dissertation results chapter.
-
-Usage:
-    python analyse_results.py
+Results analysis script for QuizGen evaluation.
 """
 
 import json

@@ -1,14 +1,5 @@
 """
 Annotation analysis scripts for dissertation results.
-
-Sections:
-  1. Session-level summary stats
-  2. Cognitive-level aggregation table (Table 4.2)
-  3. Structured error analysis (Option 3)
-  4. Representative question extraction (Option 4)
-
-Usage:
-  python annotation_analysis.py
 """
 
 import csv
@@ -28,9 +19,9 @@ def load_sessions():
         return {r["session"]: r for r in csv.DictReader(f)}
 
 
-# ---------------------------------------------------------------------------
+
 # 1. Session-level summary
-# ---------------------------------------------------------------------------
+
 def session_summary():
     sessions = load_sessions()
     print("=== Session Summary ===")
@@ -46,9 +37,8 @@ def session_summary():
         )
 
 
-# ---------------------------------------------------------------------------
 # 2. Cognitive-level aggregation
-# ---------------------------------------------------------------------------
+
 def cog_level_table():
     sessions = load_sessions()
 
@@ -78,9 +68,9 @@ def cog_level_table():
         )
 
 
-# ---------------------------------------------------------------------------
+
 # 3. Structured error analysis
-# ---------------------------------------------------------------------------
+
 
 # Manually classified defect types based on question review
 CIRCULAR  = {("S3", "7")}
@@ -146,9 +136,7 @@ def error_analysis():
         print(f"  A: {r['answer']}")
 
 
-# ---------------------------------------------------------------------------
-# 4. Representative questions for qualitative analysis
-# ---------------------------------------------------------------------------
+
 def qualitative_examples():
     rows = {(r["session"], r["q_num"]): r for r in load_questions()}
 
@@ -173,9 +161,7 @@ def qualitative_examples():
               f"distractor={r['distractor']}  cog_match={r['cog_match']}")
 
 
-# ---------------------------------------------------------------------------
-# Entry point
-# ---------------------------------------------------------------------------
+
 if __name__ == "__main__":
     session_summary()
     cog_level_table()

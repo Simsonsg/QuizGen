@@ -1,14 +1,4 @@
-"""
-AutoQuiz — development entry point.
 
-Usage:
-    python main.py <file> [options]
-
-Examples:
-    python main.py data/input/lecture.pdf
-    python main.py data/input/lecture.pdf --strategy clean --difficulty hard --cognitive analysis --candidates 4
-    python main.py data/input/lecture.pdf --no-answerability-check
-"""
 
 import argparse
 from backend.preprocessing.pipeline import preprocess

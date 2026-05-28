@@ -41,11 +41,11 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 app = FastAPI(title="AutoQuiz")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
-# Use Jinja2 directly (bypasses Starlette's wrapper which breaks on Python 3.14)
+
 _env = _jinja2.Environment(
     loader=_jinja2.FileSystemLoader(TEMPLATES_DIR),
     autoescape=True,
-    cache_size=0,  # disable cache — avoids Python 3.14 hash bug
+    cache_size=0,  # disable cache 
 )
 _env.globals["zip"] = zip
 
@@ -58,9 +58,7 @@ def render(name: str, ctx: dict) -> HTMLResponse:
 _sessions: dict[str, dict] = {}
 
 
-# ---------------------------------------------------------------------------
-# Upload + generate
-# ---------------------------------------------------------------------------
+
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
@@ -162,9 +160,9 @@ async def generate(
     return RedirectResponse(f"/quiz/{sid}", status_code=303)
 
 
-# ---------------------------------------------------------------------------
+
 # Quiz
-# ---------------------------------------------------------------------------
+
 
 @app.get("/quiz/{sid}", response_class=HTMLResponse)
 async def quiz(request: Request, sid: str):
@@ -254,9 +252,9 @@ async def next_question(sid: str):
     return RedirectResponse(f"/quiz/{sid}", status_code=303)
 
 
-# ---------------------------------------------------------------------------
+
 # Results + feedback
-# ---------------------------------------------------------------------------
+
 
 @app.get("/results/{sid}", response_class=HTMLResponse)
 async def results(request: Request, sid: str):
@@ -303,9 +301,9 @@ async def feedback(
     return RedirectResponse(f"/results/{sid}", status_code=303)
 
 
-# ---------------------------------------------------------------------------
+
 # Helpers
-# ---------------------------------------------------------------------------
+
 
 def _get_session(sid: str) -> dict | None:
     return _sessions.get(sid)
