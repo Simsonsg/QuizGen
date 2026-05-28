@@ -35,46 +35,6 @@
     {% endfor %}
   </div>
 
-  <hr>
-
-  {% if feedback_saved %}
-  <div class="alert alert-success">Feedback saved — thank you!</div>
-  {% else %}
-  <h2>Feedback</h2>
-  <form action="/results/{{ sid }}/feedback" method="post" class="feedback-form">
-    <div class="form-group">
-      <label>How did the difficulty feel?</label>
-      <div class="radio-row">
-        {% for val in ["too easy", "about right", "too hard"] %}
-        <label class="radio-label">
-          <input type="radio" name="perceived_difficulty" value="{{ val }}" required>
-          {{ val }}
-        </label>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="clarity_rating">Question clarity (1 = very unclear, 5 = very clear)</label>
-      <div class="radio-row">
-        {% for n in range(1, 6) %}
-        <label class="radio-label">
-          <input type="radio" name="clarity_rating" value="{{ n }}" required>
-          {{ n }}
-        </label>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="comments">Additional comments (optional)</label>
-      <textarea id="comments" name="comments" rows="3" placeholder="Any other thoughts?"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit Feedback</button>
-  </form>
-  {% endif %}
-
   <a href="/" class="btn btn-secondary" style="margin-top:1rem">Generate Another Quiz</a>
 </div>
 {% endblock %}
